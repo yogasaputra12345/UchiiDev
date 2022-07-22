@@ -2,8 +2,353 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="css/indexstyle.css">
     <title>Title</title>
+    <style>
+
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+            font-family:Helvetica;
+        }
+
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+        }
+
+        header {
+            display: flex;
+            height: 3.6rem;
+            padding: 0.6rem;
+            background-color: rgba(0, 0, 0, 0.75);
+            align-items: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        header > a:nth-child(1) > img {
+            flex-grow: 1;
+            display: flex;
+            height: 3.6rem;
+            object-fit: contain;
+        }
+
+        header > a:nth-child(2) {
+            display: flex;
+            flex-grow: 1;
+            height: 2rem;
+            justify-content: flex-end;
+        }
+
+        header>a>img {
+            display: block;
+            height: 100%;
+        }
+
+        header.header-hidden{
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        header.header-hidden > a:nth-child(1) > img, header.header-hidden > a:nth-child(2) {
+            opacity: 0;
+        }
+
+        button.header-toggle {
+            display: flex;
+            height: 2rem;
+            width: 2rem;
+            background: transparent url(https://www.pikpng.com/pngl/b/425-4251166_menu-bar-icon-white-clipart.png) no-repeat right center;
+            margin-right: 1rem;
+            background-size: 1.46rem;
+            border: 0;
+            flex-grow: 1;
+        }
+
+        .header-sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        /* begin nav */
+
+        nav {
+            position: fixed;
+            top: 0;
+            background: #fff;
+            width: 80vw;
+            height: 100vh;
+            overflow: hidden;
+            transform: translateX(100%);
+            transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+            transition-delay: 0.2s;
+            z-index: 1;
+            opacity:0;
+        }
+
+        nav > ul > li {
+            border-bottom: 0.1px solid #f3f3f3;
+            height: 3.1rem;
+            display: flex;
+            text-transform: uppercase;
+        }
+
+        nav > ul > li:nth-child(1) {
+            background-color: #393b40;
+            justify-content: flex-end;
+            padding-right: 1.5rem;
+            height: 3.6rem;
+            border-bottom: 0px;
+        }
+
+        li.active {
+            border-left: 3px solid #69e0ff;
+            margin-top: -0.1px;
+        }
+
+        nav > ul > li:last-child {
+            background-color: #393b40;
+            position: absolute;
+            bottom: -02px;
+            width: 100%;
+        }
+
+        nav > ul > li > a {
+            color: #393b40;
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 2rem;
+        }
+
+        nav > ul > li:last-child > a {
+            color: #fff;
+        }
+
+        .showClose {
+            background-image: url("https://ljc-dev.github.io/testing0/ham-close.svg");
+            height: 1.8rem;
+            width: 1.8rem;
+            background-color: transparent;
+            border: none;
+            background-size: contain;
+            align-self: center;
+        }
+
+        .showNav{
+            transform: translateX(0);
+            opacity:1;
+        }
+
+        .closeNav{
+            transform: translateX(-100%);
+        }
+
+        .blackBackground {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgb(0 0 0 / 50%);
+            z-index: 0;
+            transform: translate(20rem);
+            transition: opacity .25s ease-in-out;
+            opacity: 0;
+            display: none;
+        }
+
+        .blackBackgroundOn{
+            display:block;
+            opacity:1;
+            transform:translate(0);
+        }
+
+        /* Einde nav */
+
+        /* Einde header */
+
+
+        /* Begin van home */
+
+        h1>a>img {
+            width: 100%;
+        }
+
+        .stickyMargin{
+            margin-top: 3.6rem;
+        }
+
+        main > .home-1 {
+            height: 100vh;
+            background: url(https://gekkeboyjeff.github.io/Project-Genshin//images/home-background-1.jpg);
+            background-size: cover;
+            position: relative;
+            width: 100vw;
+            margin-top: -3.6rem;
+            object-fit: contain;
+        }
+
+        .home-1 > h1 {
+            width: 70%;
+            margin: 0 auto;
+            padding-top: 4rem;
+        }
+
+        img.media-player-background {
+            height: 2.7rem;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            bottom: 7.5rem;
+        }
+
+        button.open-video {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 26.5vh;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            background: url(https://gekkeboyjeff.github.io/Project-Genshin/images/genshin-media-player-image.png);
+            width: 14rem;
+            height: 51px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: none;
+        }
+
+        button.open-video::before {
+            content: '';
+            position: absolute;
+            height: 1.9rem;
+            width: 1.9rem;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAA4CAYAAADuMJi0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2lpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjYThkMDRiYy1jNTZkLTJkNDMtOGY5Yy02OGY3YWNhYzQ5ZjgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTA2MkM0NEE4MTEyMTFFOThGQkVBMzY2NjBEODFGQzgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTA2MkM0NDk4MTEyMTFFOThGQkVBMzY2NjBEODFGQzgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg0RkI2NTNEODBGNjExRTlCRkZGRDA0Q0Y2REQ5QTFEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg0RkI2NTNFODBGNjExRTlCRkZGRDA0Q0Y2REQ5QTFEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+owt/IAAAAa5JREFUeNrsmE9Kw0AYxZvafT1BPUC9gJ7AhXanuK4iuKguCkVB/IOgCK1GrBaEbqwbddW0UE+gF/ACvYEXsOMbyGAWSSZ1Jm8R+uDHBBLmZSYz3zdfHCFEjql8jqxC3M3VnfoKml3QGT623hkjlGYVMIJ5ExTTNqwEruvgG6Y1E0MnbtGg86ibPX+aP1mGSpfgCMYT1io9BD94sSp7W3Rh2gbltKc0TCfgHNMsWBv/DEzwsuvsSPMKUxeUmKFtH4xh2mDH0iuYrrGDt8M0PMCq9bTZwoJuwQ3MxonSk6E2YfTC2Banst8wM9sjfPAzyNe/M/4U2oZRlxG8ZXoqJDUzGeGzP30fVg9REdqD0V1aZ5pB4PoazJuYJRlhR7UwGlmJb5k/ec8MZW3R91s7kosmhr74UxMUNc9r0T0QphrbUOoJLDENlS5AnmmoVGUbSrVBmWmodAycqD51sdQk0G6AN2ptAVxQmmbj21KDMaVhPygG2a0tgMf4hi5YCPaZam0BeLVFmJntKb0Hi6zQtsVMT3OM9NQDy5k4YngBo5aNQ1Ti2kL+FZ7VFkn0K8AA4lbtjhMjqe0AAAAASUVORK5CYII=) no-repeat;
+            background-size: 1rem;
+            background-position: center 0.5rem;
+            background-color: white;
+            border-radius: 50%;
+            margin-top: 9px;
+        }
+
+        .home-1 > a {
+            display: flex;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 12.5vh;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+            width: 12rem;
+            background-color: #e8bd06;
+            color: #815a34;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.8em;
+            line-height: 2rem;
+            padding: 11px;
+        }
+
+        /* 2de section homepage */
+
+        section.h-section2 {background: url(https://gekkeboyjeff.github.io/Project-Genshin/images/home-section2-background.jpg);background-size: cover;text-align: center;padding: 2rem 1rem 2rem 1rem;color: white;}
+
+        h2::before {
+            content: '';
+            display: inline-flex;
+            height: 2rem;
+            width: 33%;
+            background: url(https://gekkeboyjeff.github.io/Project-Genshin/images/home-section2-before.png) no-repeat right center/cover;
+            background-size: contain;
+            margin-right: 1rem;
+            background-position: center 0.7rem;
+        }
+
+        h2 {display: inline-flex;width: 100%;justify-content: center;padding-bottom: 1rem;}
+
+        h2::after {
+            content: '';
+            display: inline-flex;
+            height: 2rem;
+            width: 33%;
+            background: url(https://gekkeboyjeff.github.io/Project-Genshin/images/home-section2-before.png) no-repeat right center/cover;
+            background-size: contain;
+            margin-left: 1rem;
+            background-position: center 0.7rem;
+            transform: rotateY(180deg);
+        }
+
+        section > img {
+            display: flex;
+            width: 100%;
+            border: solid 1px #fff;
+        }
+
+        section > ul {text-decoration: none;list-style: none;}
+
+        .h-section2 > ul > li > a > p:nth-child(1) {
+            width: 67%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-left: 0.11rem;
+            text-align: left;
+        }
+
+        .h-section2 > ul > li > a > p:nth-child(2) {
+            display: inline-flex;
+            width: 33%;
+            justify-content: flex-end;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .h-section2 > ul > li > a > p {
+            color: #fff;
+            font-size: 0.58rem;
+        }
+
+        .h-section2 > ul > li > a {height: 2.4rem;display: flex;align-items: center;border-bottom: 0.02rem solid rgba(255, 255, 255, 0.08);text-decoration: none;justify-content: space-between;}
+
+        .h-section2 > a {
+            display: block;
+            line-height: 2.2rem;
+            color: #ffd49f;
+            background: rgba(255, 212, 159, 0.1);
+            border: rgba(255, 212, 159, 0.7) solid 0.02rem;
+            border-radius: 0.04rem;
+            text-decoration: none;
+        }
+        div.max300{
+            position:absolute;
+            height:480px;
+            width:320px;
+            right:0;
+            left:0;
+            margin:0 auto;
+        }
+
+        main > .home-1 {
+            width:320px;
+        }
+
+        nav{
+            max-width:320px;
+        }
+
+        header{
+            max-width:320px;
+        }
+    </style>
 </head>
 <div class="max300">
     <body>
