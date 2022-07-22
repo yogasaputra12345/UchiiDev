@@ -4,7 +4,7 @@
 *::after,
 *::before {
     box-sizing: border-box;
-    font-family:genshin;
+    font-family: Genshin;
 }
 
 * {
@@ -13,6 +13,7 @@
 }
 
 body {
+    font-family: Genshin;
 }
 
 header {
@@ -190,9 +191,9 @@ main > .home-1 {
 }
 
 .home-1 > h1 {
-    width: 75%;
+    width: 70%;
     margin: 0 auto;
-    padding-top: 14rem;
+    padding-top: 13rem;
 }
 
 img.media-player-background {
