@@ -28,7 +28,7 @@ header {
 header > a:nth-child(1) > img {
     flex-grow: 1;
     display: flex;
-    height: 3.6rem;
+    height: 3rem;
     object-fit: contain;
 }
 
@@ -190,9 +190,9 @@ main > .home-1 {
 }
 
 .home-1 > h1 {
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
-    padding-top: 4rem;
+    padding-top: 14rem;
 }
 
 img.media-player-background {
@@ -256,14 +256,14 @@ button.open-video::before {
 
 /* 2de section homepage */
 
-section.h-section2 {background: url(../img/banner2.jpg);background-size: cover;text-align: center;padding: 2rem 1rem 2rem 1rem;color: white;}
+section.h-section2 {background: url(https://toram-jp.akamaized.net/img/bg/body_bg.jpg);background-repeat: repeat;text-align: center;padding: 2rem 1rem 2rem 1rem;color: white;}
 
 h2::before {
     content: '';
     display: inline-flex;
     height: 2rem;
     width: 33%;
-    background: url(https://gekkeboyjeff.github.io/Project-Genshin/images/home-section2-slider.jpg) no-repeat right center/cover;
+    background: url(../images/home-section2-before.png) no-repeat right center/cover;
     background-size: contain;
     margin-right: 1rem;
     background-position: center 0.7rem;
