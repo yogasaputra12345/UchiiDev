@@ -3,7 +3,7 @@ nothing here, i'm just learning how to coding.
 
 Btw, i'm playing toram. Make an addfriend request if u meet me.
 
-Special thanks:
--> Mizuka Takanashi (A.K.A Mizuka_H)
--> My Guild Member (-Black Castle-)
--> 
+Special thanks to:
+Mizuka Takanashi (A.K.A Akane Shiraiyuki), My Guild Member (-Black Castle-), all of my friendlist that I can't mention 1 by 1.
+
+Love u guys, enjoy my work^^
