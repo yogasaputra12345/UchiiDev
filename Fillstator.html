@@ -64,17 +64,17 @@
                 <button class="btn btn-danger" onclick="App.reset()">Reset</button>
             </div>
         </center>
-        <div style=" align-content: center; margin-top: 5px; margin-bottom: 5px; border: 1px solid #ffffff;" hidden id="navigation_bar"></div>
-        <div id="workbench" hidden>
+        <div class="backblack" style=" align-content: center; margin-top: 5px; margin-bottom: 5px;" hidden id="navigation_bar"></div>
+        <div class="backblack" id="workbench" hidden>
             <table style="width: 100%; border-collapse: collapse; border-color: white" border=1>
                 <tr>
                     <th class=workbench rowspan=2 style="width: 50%" style="vertical-align: top;" valign=top>
                         <div style="position: relative; width: 100%;">
-                            <div id='stat-details' style="text-align: center; position: relative; color: greenyellow; font-size: 10px; top: 0px; right: 0px"></div>
+                            <div id='stat-details' style="text-align: center; position: relative; color: #28a745; font-size: 10px; top: 0px; right: 0px"></div>
                             <div id='workspace'></div>
                         </div>
                     </th>
-                    <th class=workbench style="width: 100%; vertical-align: top" id='material_display'>
+                    <th class=workbench style="width: 100%; text-align: left; vertical-align: top" id='material_display'>
                     </th>
                 </tr>
                 <tr>
@@ -87,14 +87,13 @@
                     </td>
                 </tr>
         </div>
-        <table style="width: 100%">
+        <table class="backblack" style="width: 100%">
             <tr>
                 <td style="text-align: left">
-                    <button onclick="App.reset()" style="color: red; font-weight: bold">Reset</button>
+                    <button class="btn btn-normal" onclick="App.promptRename()" id="rename_button">Rename Current Stat</button>
                 </td>
                 <td style="text-align: right">
-                    <button onclick="App.promptRename()" id="rename_button">Rename Current Stat</button>
-                    <button onclick="App.duplicateCurrent()" id="duplicate_button">Duplicate Current Stat</button>
+                    <button class="btn btn-normal" onclick="App.duplicateCurrent()" id="duplicate_button">Duplicate Current Stat</button>
                 </td>
             </tr>
         </table>

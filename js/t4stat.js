@@ -181,7 +181,7 @@ class Slot {
 
         buffer += '</select>';
 
-        buffer += `<input autocomplete="off" type="text" maxlength=4 size=3 disabled id="input${this.slot_num}" value=0 onkeydown="App.getCurrent().slots[${this.slot_num}].onKeyPress(event)" oninput="App.getCurrent().slots[${this.slot_num}].onUpdate()" style="color: blue"></input> <span id="matcost${this.slot_num}" style="color: green; font-size: 8pt"></span>`
+        buffer += `<input class="inputdata" autocomplete="off" type="number" maxlength=4 disabled id="input${this.slot_num}" value=0 onkeydown="App.getCurrent().slots[${this.slot_num}].onKeyPress(event)" oninput="App.getCurrent().slots[${this.slot_num}].onUpdate()" style="color: blue"></input> <span id="matcost${this.slot_num}" style="color: green; font-size: 8pt"></span>`
         return buffer;
     }
 
@@ -251,7 +251,6 @@ class Slot {
         if (data_id === 0) {
             // reset
             this.stat_name = null;
-            this.stat_data = null;
             this.currentStat = 0;
             this.futureStat = 0;
             this.currentSteps = 0;
@@ -669,11 +668,11 @@ class Stat {
     }
 
     updateMaterialCosts() {
-        let buffer = `<table style="width: 100%"><tr><th style="width: 30%; text-align: left">Material</th><th style="text-align: left">Amount</th></tr>`
+        let buffer = `<table style="width: 100%; border-color: white;" border="1"><tr class="inverttable"><th style="width: 50%; padding: 3px; text-align: center">Mats</th><th style="text-align: center">Amount</th></tr>`
         for (let mat in this.mats) {
-            buffer += `<tr><td>${mat}</td><td>${this.mats[mat]}</td></tr>`;
+            buffer += `<tr style="font-size: 14px;" ><td style="padding: 2px;">${mat}</td><td style="text-align: center">${this.mats[mat]}</td></tr>`;
         }
-        buffer += `<tr><th style="text-align: left">Highest / Step</th><td>${this.max_mats}</td></tr></table>`
+        buffer += `<tr style="font-size: 14px;" ><th style=" padding:2px;">Highest / Step</th><td style="text-align: center">${this.max_mats}</td></tr></table>`
 
         document.getElementById('material_display').innerHTML = buffer;
     }
@@ -1113,7 +1112,7 @@ class MainApp {
             const instance = this.stats[workspace_id]
             const focused = workspace_id === this.current;
 
-            buffer.push(`<div style="display: inline-block; border: solid 1px blue; border-radius: 7px; padding: 3px;${focused ? ' background-color: lightpink' :' background-color: none'}"><button style="border: none; background: none" onclick="App.setCurrent('${workspace_id}')">${workspace_id}</button><button onclick="App.despawn('${workspace_id}')" style="color: red; border: none; background: none">x</button></div>`);
+            buffer.push(`<div style="display: inline-block; border: solid 1px black; border-radius: 7px; padding: 3px;${focused ? ' background-color: #fec34d' :' background-color: none'}"><button style="border: none; background: none" onclick="App.setCurrent('${workspace_id}')">${workspace_id}</button><button onclick="App.despawn('${workspace_id}')" style="color: red; border: none; background: none">x</button></div>`);
         }
         return buffer.join(' ')
     }

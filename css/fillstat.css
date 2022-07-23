@@ -58,7 +58,6 @@ header > a:nth-child(2) {
     flex-grow: 1;
     justify-content: center;
     color: white;
-    font-size: 17;
     flex-wrap: wrap;
 }
 
@@ -359,6 +358,10 @@ section > ul {text-decoration: none;list-style: none;}
     background-color: red;
     border-color: red;
 }
+.btn-normal{
+    color: white;
+    background-color: #007bff;
+}
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -371,8 +374,18 @@ section > ul {text-decoration: none;list-style: none;}
     user-select: none;
     border: 1px solid transparent;
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size:14px;
     line-height: 1rem;
     margin-top: 10px;
     border-radius: .25rem;
+}
+.inverttable{
+    background-color: white;
+    color: black;
+}
+.inputdata{
+    width: 30%;
+    position: relative;
+    color: #007bff;
+    margin: 1px 0px 5px;
 }
