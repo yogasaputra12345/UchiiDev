@@ -12,7 +12,7 @@
 <body onload="document.getElementById('recipe_pot').value = DEFAULT_WEAPON_RECIPE_POT; App.loadSettings(); App.loadFromStorage();">
 <header class="header-hidden">
     <a href="#"><img src="img/logo.png" alt="Toram Logo"></a>
-    <a href="https://yogasaputra12345.github.io/UchiiToram/">Torampedia</a>
+    <a href="index.html">Torampedia</a>
     <button class="header-toggle"></button>
     <nav class="">
         <ul>
@@ -60,10 +60,44 @@
                         <td style='text-align: left'><input type="number" value=89 id='starting_pot'></input></td>
                     </tr>
                 </table>
-                <button class="btn-hover btn-replace" onclick="App.spawn()">Go!</button>&nbsp;&nbsp;
-                <button onclick="App.reset()" style="color: red; font-weight: bold">Reset</button>
+                <button class="btn btn-success" onclick="App.spawn()">Start</button>&nbsp;&nbsp;
+                <button class="btn btn-danger" onclick="App.reset()">Reset</button>
             </div>
         </center>
+        <div style=" align-content: center; margin-top: 5px; margin-bottom: 5px; border: 1px solid #ffffff;" hidden id="navigation_bar"></div>
+        <div id="workbench" hidden>
+            <table style="width: 100%; border-collapse: collapse; border-color: white" border=1>
+                <tr>
+                    <th class=workbench rowspan=2 style="width: 50%" style="vertical-align: top;" valign=top>
+                        <div style="position: relative; width: 100%;">
+                            <div id='stat-details' style="text-align: center; position: relative; color: greenyellow; font-size: 10px; top: 0px; right: 0px"></div>
+                            <div id='workspace'></div>
+                        </div>
+                    </th>
+                    <th class=workbench style="width: 100%; vertical-align: top" id='material_display'>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="workbench" style="vertical-align: top; color: red;">Preview Stat
+                        <br>dalam pengembangan...
+                    </th>
+                </tr>
+                <tr>
+                    <td class="workbench" colspan="2" style="vertical-align: top" id="formula_display">
+                    </td>
+                </tr>
+        </div>
+        <table style="width: 100%">
+            <tr>
+                <td style="text-align: left">
+                    <button onclick="App.reset()" style="color: red; font-weight: bold">Reset</button>
+                </td>
+                <td style="text-align: right">
+                    <button onclick="App.promptRename()" id="rename_button">Rename Current Stat</button>
+                    <button onclick="App.duplicateCurrent()" id="duplicate_button">Duplicate Current Stat</button>
+                </td>
+            </tr>
+        </table>
     </section>
 </main>
 <script src="js/style.js"></script>

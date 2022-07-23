@@ -7,6 +7,25 @@
     font-family: Genshin;
 }
 
+.workbench {
+    padding: 5px;
+}
+html{
+    background: url(https://toram-jp.akamaized.net/img/bg/body_bg.jpg);
+    background-repeat: repeat;
+    text-align: center;
+    color: white;
+}
+select, input{
+    width: 100%;
+    font-size: 14px;
+    font-size: max(14px, 0.8em);
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 0px solid;
+    border-radius: 4px;
+    opacity: 0.7;
+}
 * {
     padding: 0px;
     margin: 0px;
@@ -329,4 +348,31 @@ section > ul {text-decoration: none;list-style: none;}
     border: rgba(255, 212, 159, 0.7) solid 0.02rem;
     border-radius: 0.04rem;
     text-decoration: none;
+}
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-danger {
+    color: #fff;
+    background-color: red;
+    border-color: red;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-top: 10px;
+    border-radius: .25rem;
 }
