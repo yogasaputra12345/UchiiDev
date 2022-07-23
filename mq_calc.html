@@ -11,7 +11,6 @@
         form{
             width: 90%;
         }
-
     </style>
 </head>
 <body>
@@ -24,10 +23,10 @@
             <li><button class="showClose"></button></li>
             <li><a href="index.html">Home</a></li>
             <li><a href="Error/index.html">Equipment</a></li>
-            <li><a href="Error/index.html">Crysta</a></li>
-            <li><a href="Error/index.html">Leveling Player</a></li>
-            <li><a href="Fillstator.html">Fillstator</a></li>
-            <li class="active"><a href="mq_calc.html">mq calculator</a></li>
+            <li><a href="Error/index.html">Ninja Scroll Maker</a></li>
+            <li><a href="Error/index.html">Pot Calculator</a></li>
+            <li><a href="fillstator.html">Fillstator</a></li>
+            <li class="active"><a href="mq_calc.html">MQ Calculator</a></li>
             <li><a href="Error/index.html">Bot WA Toram</a></li>
             <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">About Me</a></li>
             <li><a href="Error/index.html">Log in</a></li>
@@ -41,17 +40,17 @@
             <h2 id="title" style="text-align: center; color: white">Main Quest Calculator</h2>
         </div>
         <center>
-        <div class="backblack" style="padding: 5px; position: relative;">
+        <tr class="backblack" style="padding: 5px; position: relative;">
         <form>
 
                 <center>
                 <table>
                     <tr>
-                        <td style='text-align: right'>Level: </td>
+                        <td style='text-align: right'>Char Level: </td>
                         <td style='text-align: left'><input type="number" id="level" min="1" value="1"/></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>Level (%): </td>
+                        <td style='text-align: right'>Char Level (%): </td>
                         <td style='text-align: left'><input type="number" id="level-percentage" min="0" max="99" value="0"/></td>
                     </tr>
                     <tr>
@@ -59,30 +58,72 @@
                         <td style='text-align: left'><input type="number" id="target-level" min="1"/></td>
                     </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center">
+                    <td colspan="2" style="text-align: center; padding: 5px; font-size: 17px;">
                         <strong>Total XP required</strong>: <span id="xp-required"></span>
                     </td>
                 </tr>
-                </table>
+                    <tr style="text-align: center;">
+                        <td><input type="radio" name="ui-select" id="mq-ui" data-selector="1" checked/>Main Quest</td>
+                        <td><input type="radio" name="ui-select" id="npc-ui" data-selector="2"/>NPC Quest</td>
+                    </tr>
+                    </table>
                     <table>
-                <div>
-                    <div>
-                        <label for="mq-from">From</label>
-                        <select id="mq-from"></select>
-                    </div>
-
+                        <fieldset id="npc-group" class="section ui-group" style="display: none;">
+                            <legend class="v-align">
                                 <div>
-                                    <label for="mq-until">Until</label>
-                                    <select id="mq-until"></select>
+                                    <span>NPC Quest</span>
+                                    <img id="quest-popup" class="question-mark"/>
+                                </div>
+                            </legend>
+                            <div class="grid grid-1 quest-block">
+                                <div class="col-1">
+                                    <label for="quest-name">Quest</label>
+                                    <select id="quest-name"></select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2">
+                                <div class="col-1">
+                                    <label for="quest-name">Exp</label>
+                                    <input type="number" id="quest-exp" min="0"/>
+                                </div>
+                                <div class="col-2">
+                                    <label for="quest-times">N° of Times</label>
+                                    <input type="number" id="quest-times" min="0" value="1"/>
+                                </div>
+                            </div>
+
+                            <div class="quest-info">
+                                <p>
+                                    Repeat this quest <strong><span id="target-times"></span> times</strong> to reach target level
+                                </p>
+                                <p>
+                                    By doing this quest for <strong><span id="times-value"></span> times</strong>, you'll reach <strong>Level <span id="times-level"></span></strong>
+                                </p>
+                            </div>
+                        </fieldset>
+
+                        <fieldset id="mq-group" class="section ui-group">
+                            <legend>Main Quest</legend>
+                            <div class="grid grid-1 nogap mq-block">
+                                <div class="col-1 grid grid-1 nogap">
+                                    <label class="col-1 text-center" for="mq-from">From</label>
+                                    <select class="col-1" id="mq-from"></select>
                                 </div>
 
-                                <div>
+                                <div class="col-1 grid grid-1 nogap">
+                                    <label class="col-1 text-center" for="mq-until">Until</label>
+                                    <select class="col-1" id="mq-until"></select>
+                                </div>
+
+                                <div class="col-1 quest-info">
                                     <p id="mq-xp"></p>
                                     <p id="mq-eval"></p>
                                     <p id="mq-startFrom"></p>
                                     <p id="mq-stopAt"></p>
                                 </div>
                             </div>
+                        </fieldset>
                         </table>
                     </center>
                 </form>
