@@ -35,9 +35,12 @@ header > a:nth-child(1) > img {
 
 header > a:nth-child(2) {
     display: flex;
+    text-decoration: none;
     flex-grow: 1;
-    height: 2rem;
-    justify-content: flex-end;
+    justify-content: center;
+    color: white;
+    font-size: 17;
+    flex-wrap: wrap;
 }
 
 header>a>img {
