@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Uchii">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Torampedia: Fillstator</title>
+    <link href="css/fillstat.css" rel="stylesheet">
+    <script src="js/t4stat.js" type="text/javascript"></script>
+    <script src="js/math.js" type="text/javascript"></script>
+</head>
+<body onload="document.getElementById('recipe_pot').value = DEFAULT_WEAPON_RECIPE_POT; App.loadSettings(); App.loadFromStorage();">
+<header class="header-hidden">
+    <a href="#"><img src="img/logo.png" alt="Toram Logo"></a>
+    <a href="https://yogasaputra12345.github.io/UchiiToram/">Torampedia</a>
+    <button class="header-toggle"></button>
+    <nav class="">
+        <ul>
+            <li><button class="showClose"></button></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Error/index.html">Equipment</a></li>
+            <li><a href="Error/index.html">Crysta</a></li>
+            <li><a href="Error/index.html">Leveling Player</a></li>
+            <li class="active"><a href="Fillstator.html">Fillstator</a></li>
+            <li><a href="Error/index.html">Skill List</a></li>
+            <li><a href="Error/index.html">Bot WA Toram</a></li>
+            <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">About Me</a></li>
+            <li><a href="Error/index.html">Log in</a></li>
+        </ul>
+    </nav>
+    <div class="blackBackground"></div>
+</header>
+<main>
+    <section class="home-1">
+        <div class="backblack">
+        <h2 id="title" style="text-align: center; color: white">Fillstator</h2>
+        <h3 style="text-align: center; color: white;">Fillstat Simulator by Uchii</h3>
+        </div>
+        <center>
+            <div class="backblack" style="padding: 5px; position: relative;">
+                <table>
+                    <tr>
+                        <td style='text-align: right'>Proficiency: </td>
+                        <td style='text-align: left'><input type="number" id="proficiency" min="0" value=0></select></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: right'>TEC: </td>
+                        <td style='text-align: left'><input type="number" value=255 id='tec' min="0" max="255"></input></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: right'>Equipment type: </td>
+                        <td style='text-align: left'><select id="weap_arm" onchange="if (this.value === 'w') document.getElementById('recipe_pot').value = DEFAULT_WEAPON_RECIPE_POT; else document.getElementById('recipe_pot').value = DEFAULT_ARMOR_RECIPE_POT;"><option value='w'>Weapon</option><option value='a'>Armor</option></select></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: right'>Recipe Potential: </td>
+                        <td style='text-align: left'><input type="number" value=40 id='recipe_pot'></input></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: right'>Starting Potential: </td>
+                        <td style='text-align: left'><input type="number" value=89 id='starting_pot'></input></td>
+                    </tr>
+                </table>
+                <button class="btn-hover btn-replace" onclick="App.spawn()">Go!</button>&nbsp;&nbsp;
+                <button onclick="App.reset()" style="color: red; font-weight: bold">Reset</button>
+            </div>
+        </center>
+    </section>
+</main>
+<script src="js/style.js"></script>
+</body>
+</html>
