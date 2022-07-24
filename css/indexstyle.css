@@ -12,6 +12,16 @@
     margin: 0px;
 }
 
+@font-face {
+    font-family: Genshin2;
+    src: url(../fonts/genshin.ttf);
+}
+@font-face {
+    font-family: Genshin;
+    src: url(../fonts/genshin2.ttf);
+}
+
+
 body {
     font-family: Genshin;
 }
@@ -77,67 +87,83 @@ button.header-toggle {
 
 nav {
     position: fixed;
+    border-radius: 10px 0px 0px 10px;
     top: 0;
     right: 0;
     background: #fff;
     width: 80vw;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     transform: translateX(100%);
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
     transition-delay: 0.2s;
     z-index: 1;
 }
-
-nav > ul > li {
-    border-bottom: 0.1px solid #f3f3f3;
-    height: 3.1rem;
-    display: flex;
-    text-transform: uppercase;
+nav ul li{
+    line-height: 2.5rem;
+    border-bottom: 1px solid #0000003d;
 }
-
+nav ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    padding-left: 40px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+}
+nav ul ul{
+    position: static;
+    display: none;
+}
+nav ul .drop-show.show{
+    display: block;
+}
+nav ul ul li{
+    line-height: 2rem;
+    border-bottom: none;
+}
+nav ul ul li a{
+    font-size: 13px;
+    padding-left: 40px;
+    color: #1c283e;
+}
 nav > ul > li:nth-child(1) {
-    background-color: #393b40;
+    background-color: #1c283e;
     justify-content: flex-end;
     padding-right: 1.5rem;
     height: 3.6rem;
     border-bottom: 0px;
 }
-
-li.active {
-    border-left: 3px solid #69e0ff;
-    margin-top: -0.1px;
+nav > ul > li:nth-child(1) a{
+    color: white;
+    font-size: 17px;
 }
 
+
+
+
+
+
 nav > ul > li:last-child {
-    background-color: #393b40;
+    background-color: #fff;
     position: absolute;
     bottom: -02px;
     width: 100%;
 }
 
-nav > ul > li > a {
-    color: #393b40;
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 2rem;
-}
-
 nav > ul > li:last-child > a {
-    color: #fff;
+    color: black;
 }
 
 .showClose {
-    background-image: url("https://ljc-dev.github.io/testing0/ham-close.svg");
+    background-image: url("../media/images/bg.png");
     height: 1.8rem;
     width: 1.8rem;
     background-color: transparent;
     border: none;
     background-size: contain;
-    align-self: center;
+    position: absolute;
 }
 
 .showNav{
@@ -273,7 +299,7 @@ h2::before {
     background-position: center 0.7rem;
 }
 
-h2 {display: inline-flex;width: 100%;justify-content: center;padding-bottom: 1rem;}
+h2 {display: inline-flex;width: 100%;justify-content: center;padding-bottom: 1rem;color: #D3BC8E;}
 
 h2::after {
     content: '';

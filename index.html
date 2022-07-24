@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Torampedia</title>
     <link href="css/indexstyle.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
 <header class="header-hidden">
@@ -14,16 +16,23 @@
     <button class="header-toggle"></button>
     <nav class="">
         <ul>
-            <li><button class="showClose"></button></li>
-            <li class="active"><a href="https://yogasaputra12345.github.io/UchiiToram/">Home</a></li>
-            <li><a href="Error/index.html">Guide & Pro Tips</a></li>
-            <li><a href="Error/index.html">Item Search</a></li>
-            <li><a href="Error/index.html">Leveling Player</a></li>
-            <li><a href="fillstator.html">Fillstator</a></li>
-            <li><a href="mq_calc.html">MQ calculator</a></li>
-            <li><a href="Error/index.html">Bot WA Toram</a></li>
+            <li><div style="padding-left: 90%; padding-top: 11px;"><button class="showClose"></button></div><a>MENU</a></li>
+            <li class="active"><a href="Error/index.html">Guide & Pro Tips (CS)</a></li>
+            <li><a href="Error/index.html">Items List (Coming Soon)</a></li>
+            <li><a href="Error/index.html">Monsters List (CS)</a></li>
+            <li><a href="Error/index.html">Skill List (Coming Soon)</a></li>
+            <li><a class="drop-btn">Tools & Simulator<i class="fas fa-caret-down"></i></a>
+                <ul class="drop-show">
+                    <li><a href="Error/index.html">Character Leveling (CS)</a></li>
+                    <li><a href="mq_calc.html">MQ & Sidequest Calculator</a></li>
+                    <li><a href="fillstator.html">Fillstator</a></li>
+                    <li><a href="pot_calc.html">Pot Craft Calculator</a></li>
+                    <li><a href="ninja_maker.html">Ninja Scroll Maker</a></li>
+                </ul>
+            </li>
+            <li><a href="Error/index.html">Whatsapp & Discord Bot</a></li>
             <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">About Me</a></li>
-            <li><a href="Error/index.html">Log in</a></li>
+            <li><a href="Error/index.html">Log in (to game)</a></li>
         </ul>
     </nav>
     <div class="blackBackground"></div>
@@ -32,7 +41,7 @@
     <section class="home-1">
         <h1><a href="http://en.toram.jp/"><img src="img/logo.png" alt="Toram Online"></a></h1>
         <button onclick="window.location='https://youtu.be/TDolWY8r3y0';" class="open-video"></button>
-        <a href="https://play.google.com/store/apps/details?id=com.asobimo.toramonline">Download now</a>
+        <a href="https://play.google.com/store/apps/details?id=com.asobimo.toramonline">Download Now</a>
     </section>
     <section class="h-section2">
         <h2>NEWS</h2>
@@ -41,7 +50,7 @@
             <li></li>
             <li>
                 <a href="">
-                    <p>Harga "Proto Clarity Rose" meroket, begini tanggapan Uchii...</p>
+                    <p>Video: Proses pembuatan "Proto" by Felien</p>
                     <p>July 15, 2022</p>
                 </a>
             </li>
@@ -53,26 +62,31 @@
             </li>
             <li>
                 <a href="">
-                    <p>Tanggapan Uchii mengenai nerf pada T5 DS, selengkapnya...</p>
-                    <p>Nov 13, 2020</p>
+                    <p>Tanggapan Uchii mengenai nerf T5 DS</p>
+                    <p>July 13, 2022</p>
                 </a>
             </li>
             <li>
                 <a href="">
-                    <p>Harga "Prime Senjata" meroket, begini tanggapan Uchii...</p>
+                    <p>Petani "Bwing" mengeluhkan penurunan daya beli player</p>
                     <p>July 12, 2022</p>
                 </a>
             </li>
             <li>
                 <a href="">
-                    <p>Gempar! P. Suzuki: "PVP tidak akan rilis"</p>
+                    <p>P. Suzuki: "Rambut saya tumbuh 1 cm"</p>
                     <p>July 11, 2022</p>
                 </a>
             </li>
         </ul>
-        <a href="#">More</a>
+        <a href="#">More (Coming Soon)</a>
     </section>
 </main>
 <script src="js/style.js"></script>
+<script>
+    $('.drop-btn').click(function (){
+        $('nav ul .drop-show').toggleClass("show");
+    });
+</script>
 </body>
 </html>
