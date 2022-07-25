@@ -47,3 +47,7 @@ function calcSticky(){
         main.classList.remove("stickyMargin")
     }
 }
+
+if(window.matchMedia("(min-width: 426px)").matches){
+    alert("Web merupakan prototype mobile app. Gunakan handphone, matikan desktop mode, atau beralih ke mode potrait untuk mengakses web.")
+}
