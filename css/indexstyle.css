@@ -103,6 +103,10 @@ nav ul li{
     line-height: 2.5rem;
     border-bottom: 1px solid #0000003d;
 }
+li.active{
+    border-left: 3px solid #69e0ff;
+    margin-top: -0.1px;
+}
 nav ul li a{
     text-decoration: none;
     color: black;
@@ -117,6 +121,9 @@ nav ul ul{
     display: none;
 }
 nav ul .drop-show.show{
+    display: block;
+}
+nav ul .drop-show2.show{
     display: block;
 }
 nav ul ul li{
@@ -136,6 +143,14 @@ nav ul li a.drop-btn:after{
     font-weight: 600;
     margin-left: 5px;
 }
+nav ul li a.drop-btn2:after{
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-left: 5px;
+}
 nav > ul > li:nth-child(1) {
     background-color: #1c283e;
     justify-content: flex-end;
@@ -148,20 +163,20 @@ nav > ul > li:nth-child(1) a{
     font-size: 17px;
 }
 
-
-
-
-
-
 nav > ul > li:last-child {
-    background-color: #fff;
-    position: absolute;
-    bottom: -02px;
     width: 100%;
+    border-bottom: none;
 }
 
-nav > ul > li:last-child > a {
-    color: black;
+nav > ul > li:last-child > p {
+    font-size: 11px;
+    font-style: italic;
+    text-align: right;
+    font-family: arial;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    color: #999;
+    line-height: 14.5px;
 }
 
 .showClose {
