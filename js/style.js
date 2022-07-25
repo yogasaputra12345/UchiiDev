@@ -49,5 +49,5 @@ function calcSticky(){
 }
 
 if(window.matchMedia("(min-width: 426px)").matches){
-    alert("Web ini merupakan prototype mobile app. Gunakan handphone, matikan desktop mode, atau beralih ke mode potrait untuk mengakses web.")
+    alert("Web ini merupakan prototype mobile app. Apabila anda menggunakan PC: Buka mode inspect code (Device emulation). Apabila menggunakan handphone: matikan desktop mode, atau beralih ke mode potrait untuk mengakses web.")
 }
