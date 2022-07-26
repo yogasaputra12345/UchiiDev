@@ -5,10 +5,18 @@
     <meta name="author" content="Uchii">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Torampedia: Potential Calculator</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
     <link href="css/fillstat.css" rel="stylesheet">
     <style>
         form{
             width: 90%;
+        }
+        table{
+            width: 90%;
+            margin: 5px;
+        }
+        fieldset{
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -61,7 +69,7 @@
                 <legend>Base Stats</legend>
                 <table>
                     <tr>
-                        <td><label>STR: </label></td>
+                        <td style="width: 50%"><label>STR: </label></td>
                         <td><input class="small-input" id="STR" type="number" min="1"/></td>
                     </tr>
                     <tr>
@@ -90,7 +98,7 @@
                 <legend>Total Equipment Stats</legend>
                 <table>
                     <tr>
-                        <td><label>STR: </label></td>
+                        <td style="width: 50%"><label>STR: </label></td>
                         <td><input class="small-input" id="eSTR" type="number" min="0"/></td>
                     </tr>
                     <tr>
@@ -111,7 +119,7 @@
                 <legend>Craft Type</legend>
                 <table>
                     <tr>
-                        <td><label for="craft-type">Type: </label></td>
+                        <td style="width: 50%"><label for="craft-type">Type: </label></td>
                         <td><select id="craft-type">
                             <option value="Armor">Armor</option>
                             <option value="1H Sword">1H Sword</option>
@@ -123,6 +131,7 @@
                             <option value="Knuckle">Knuckle</option>
                             <option value="Halberd">Halberd</option>
                             <option value="Katana">Katana</option>
+                        </select>
                         </td>
                     </tr>
                 </table>
@@ -146,48 +155,61 @@
                 </table>
     </fieldset>
             <fieldset>
-        <legend>
-            <div>
-                <span>Crafting Stats</span>
-                <img class="question-mark" id="crafting-popup">
-            </div>
-        </legend>
-        <div class="grid grid-2 nogap">
-            <div class="col-1">
-                <label for="equipment-difficulty">Difficulty</label>
-                <input class="small-input" id="equipment-difficulty" type="number" min="0"/>
-            </div>
-            <div class="col-2">
-                <span id="difficulty-divider">/</span>
-                <input class="small-input" id="your-difficulty" type="number" min="0" disabled/>
-            </div>
-        </div>
-
-        <div class="grid grid-2">
-            <div></div>
-            <div class="col-1">
-                <label for="base-potential">Base Potential</label>
-                <input class="small-input" id="base-potential" type="number" min="0"/>
-            </div>
-            <div class="col-2">
-                <label for="total-potential">Total Potential</label>
-                <input class="small-input" id="total-potential" type="number" min="0" disabled/>
-            </div>
-
-            <div class="col-1">
-                <label for="proeficiency">Proeficiency</label>
-                <input class="small-input" id="proeficiency" type="number" min="0"/>
-            </div>
-            <div class="col-2">
-                <label for="success-rate">Success Rate (%)</label>
-                <input class="small-input" id="success-rate" type="number" min="0" disabled/>
-            </div>
-        </div>
-
-        <div id="warning">
-            You can't craft this item because <span> equipment difficulty &gt; your difficulty</span>.
-        </div>
-    </fieldset>
+                <legend>Crafting Stats</legend>
+                <table>
+                    <tr>
+                        <td style="width: 50%">
+                            <label>Item difficulty: </label>
+                        </td>
+                        <td>
+                            <input class="small-input" id="equipment-difficulty" type="number" min="0"/>
+                        </td>
+                        <td>
+                            <span id="difficulty-divider" style="margin: 0 3px"> / </span>
+                        </td>
+                        <td>
+                            <input class="small-input" id="your-difficulty" type="number" min="0" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <label for="base-potential">Base Potential: </label>
+                        </td>
+                        <td colspan="3">
+                            <input class="small-input" id="base-potential" type="number" min="0"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <label for="total-potential">Total Potential: </label>
+                        </td>
+                        <td colspan="3">
+                            <input class="small-input" id="total-potential" type="number" min="0" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <label>Profiency: </label>
+                        </td>
+                        <td colspan="3">
+                            <input id="proeficiency" type="number" min="0"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <label>Success Rate (%): </label>
+                        </td>
+                        <td colspan="3">
+                            <input id="success-rate" type="number" min="0" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <p id="warning" style="color: red; margin: 10px 0;">You can't craft this item because <span> equipment difficulty &gt; your difficulty</span>.</p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
         </form>
             </center>
         </div>

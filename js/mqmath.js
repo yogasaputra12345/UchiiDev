@@ -226,7 +226,7 @@ const evaluateMQ = function () {
                 mqStartIndex = mqEnd-(i-mqBegin);
             }
         }
-        $("#mq-xp").html(`<strong>XP</strong>: ${new Intl.NumberFormat().format(mqXP)}`);
+        $("#mq-xp").html(`<strong>Total Quest EXP</strong>: ${new Intl.NumberFormat().format(mqXP)}`);
         let [mqLv, mqLvP] = addXP(lv, lvP, mqXP);
         $("#mq-eval").html(`After doing Main Quest's above range you'll reach <strong>Lv.${mqLv} (${mqLvP}%)</strong>`);
 
@@ -247,7 +247,7 @@ const evaluateMQ = function () {
         }
     }
     else {
-        $("#mq-eval").html("<em>Seems we have a time travel here</em>");
+        $("#mq-eval").html("Uchii: <em>Seems we have a time travel here</em>");
         $("#mq-stop").html("");
     }
 }

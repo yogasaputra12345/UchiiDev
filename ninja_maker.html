@@ -1,95 +1,193 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-141HZ4L42J"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-141HZ4L42J');
-    </script>
-    <title>Toram Tools</title>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="keywords" content="Toram Online, Ninja Scroll, Combinations, List, Simulator, Database, Crafting"/>
-    <meta name="description" content="Ninja Scroll Database by Insane23."/>
-    <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/scroll.css"/>
+    <meta charset="UTF-8">
+    <meta name="author" content="Uchii">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Torampedia: Scroll Maker</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
+    <link href="css/fillstat.css" rel="stylesheet">
+    <style>
+        fieldset{
+            width: 90%;
+        }
+        table{
+            width: 80%;
+        }
+        fieldset{
+            margin-top: 10px;
+        }
+        .section > legend:after {
+            content: "\f059";
+            font-family: "Font Awesome 5 Free";
+            display: inline-block;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/style.js"></script>
 </head>
-
 <body>
-<div class="header" id="HEADER">
-    <a href="index.html"><div class="header-title">Ninja Scroll Database</div></a>
-</div>
+<header class="header-hidden">
+    <a style="width: 33.3%;" href="#"><img src="img/logo.png" alt="Toram Logo"></a>
+    <a href="https://yogasaputra12345.github.io/UchiiToram/">Torampedia</a>
+    <button class="header-toggle"></button>
+    <nav class="">
+        <ul>
+            <li><div style="padding-left: 90%; padding-top: 11px;"><button style="margin-top: 3px" class="showClose"></button></div><a>MENU</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Error/index.html">Guide & Pro Tips</a></li>
+            <li><a href="Error/index.html">Equipment</a></li>
+            <li><a href="Error/index.html">Crysta</a></li>
+            <li><a href="Error/index.html">Monster List</a></li>
+            <li><a href="Error/index.html">Skill List</a></li>
+            <li><a class="drop-btn">Tools & Simulator</a>
+                <ul class="drop-show">
+                    <li><a href="Error/index.html">Character Leveling</a></li>
+                    <li><a href="Error/index.html">Lock Simulator</a></li>
+                    <li><a href="mq_calc.html">MQ & Sidequest Calculator</a></li>
+                    <li><a href="fillstator.html">Fillstator</a></li>
+                    <li><a href="pot_calc.html">Pot Craft Calculator</a></li>
+                    <li class="active"><a href="ninja_maker.html">Ninja Scroll Maker</a></li>
+                </ul>
+            </li>
+            <li><a class="drop-btn2">Others</a>
+                <ul class="drop-show2">
+                    <li><a href="Error/index.html">Stoodie Registlet</a></li>
+                    <li><a href="Error/index.html">Buff Food</a></li>
+                    <li><a href="Error/index.html">Monthly Dye</a></li>
+                </ul>
+            <li><a href="Error/index.html">Torampedia Forum</a></li>
+            <li><a href="https://wa.me/6285159199040/?text=Bot%20Info">Whatsapp & Discord Bot</a></li>
+            <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">Credits</a></li>
+            <li><p>Torampedia by ©Uchii. Toram Online by ©Asobimo, Inc. All Rights Reserved.</p></li>
+        </ul>
+    </nav>
+    <div class="blackBackground"></div>
+</header>
+<main>
+    <section class="home-1">
+        <div class="backblack">
+            <h2 id="title" style="text-align: center;">Scroll Maker</h2>
+            <h3 style="text-align: center; color: white;">Scroll Maker by Uchii</h3>
+            <center>
+                <fieldset>
+                    <legend>Search by Scroll Skills</legend>
+                    <table>
+                        <tr>
+                           <td style="width: 40%">
+                               <label>Skill 1: </label>
+                           </td>
+                            <td>
+                                <select id="scroll-skill-1" data-prev="-1"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Skill 2: </label>
+                            </td>
+                            <td>
+                                <select id="scroll-skill-2" data-prev="-1"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Skill 3: </label>
+                            </td>
+                            <td>
+                                <select id="scroll-skill-3" data-prev="-1"></select>
+                            </td>
+                        </tr>
+                    </table>
+                        <div style="margin-bottom: 10px">
+                            <button class="btn btn-success" id="scroll-search">Search</button>
+                            <button class="btn btn-danger" id="scroll-search-reset">Reset</button>
+                        </div>
+                </fieldset>
 
-<div class="main">
-    <div class="scroll-container">
-        <fieldset class="section" id="scroll-skills-container">
-            <legend>
-                <div>
-                    <span>Search by Scroll Skills</span>
-                    <img id="sss-popup">
-                </div>
-            </legend>
-            <div class="scroll-section" id="scroll-skills">
-                <!-- label>Type<select id="scroll-type"></select></!-->
-                <label>Skill 1<select id="scroll-skill-1" data-prev="-1"></select><!--<button class="reset-skill" data-id="1">R</button> --></label>
-                <label>Skill 2<select id="scroll-skill-2" data-prev="-1"></select><!--<button class="reset-skill" data-id="2">R</button> --></label>
-                <label>Skill 3<select id="scroll-skill-3" data-prev="-1"></select><!--<button class="reset-skill" data-id="3">R</button> --></label>
-                <div class="button-group">
-                    <button id="scroll-search">Search</button>
-                    <button id="scroll-search-reset">Reset</button>
-                </div>
-            </div>
-        </fieldset>
-
-        <fieldset class="section" style="height: 100%;">
-            <legend>
-                <div>
-                    <span>Craft a Scroll</span>
-                    <img id="cs-popup">
-                </div>
-            </legend>
-            <form action="javascript: void(0);" class="scroll-section" id="scroll-craft-components">
-                <label>Weapon 1<select required id="scroll-component-1" data-prev="-1"></select></label>
-                <label>Weapon 2<select required id="scroll-component-2" data-prev="-1"></select></label>
-                <label>Weapon 3<select required id="scroll-component-3" data-prev="-1"></select></label>
-                <div>
-                    <button id="craft-scroll">Craft</button>
-                    <button type="button" id="craft-scroll-reset">Reset</button>
-                </div>
-                <div id="craft-results-container" class="hidden">
-                    <div id="craft-results">
-                        <span class="block-header">Possible Types</span>
-                        <span class="text-center"><span class="scroll-type" id="craft-results-type"></span> Ninjustu Scroll</span></span>
-                        <span class="block-header">Skills</span>
-                        <span class="text-center"><span id="craft-results-skills"></span></span>
+                <fieldset class="section">
+                    <legend id="cs-popup">Craft a Scroll</legend>
+                    <table>
+                    <tr>
+                        <td style="width: 40%">
+                            <label>Weapon 1: </label>
+                        </td>
+                        <td>
+                            <select required id="scroll-component-1" data-prev="-1"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Weapon 2: </label>
+                        </td>
+                        <td>
+                            <select required id="scroll-component-2" data-prev="-1"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Weapon 3: </label>
+                        </td>
+                        <td>
+                            <select required id="scroll-component-3" data-prev="-1"></select>
+                        </td>
+                    </tr>
+                    </table>
+                        <div>
+                            <button class="btn btn-success" id="craft-scroll">Craft</button>
+                            <button class="btn btn-danger" id="craft-scroll-reset">Reset</button>
+                        </div>
+                    <div>
+                        <p style="font-size: 12px; margin: 5px 0"><em>Add 3 weapons to see the scroll skills & possible scroll types</em></p>
                     </div>
-                </div>
+                    <table style="width: 90%;border: 1px solid white;text-align: center;margin: 10px 0;" border="1" id="craft-results-container" class="hidden">
+                            <tr>
+                                <td style="width: 50%; background-color: white; color: black">
+                                    <span>Possible Types</span>
+                                </td>
+                                <td>
+                                    <span id="craft-results-type"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background-color: white; color: black">
+                                    <span>Scroll Skills</span>
+                                </td>
+                                <td>
+                                    <span id="craft-results-skills"></span>
+                                </td>
+                            </tr>
+                        </table>
+                </fieldset>
 
-            </form>
-        </fieldset>
-    </div>
-
-    <div class="results-parent">
-        <fieldset class="section">
-            <legend>
-                <div>
-                    <span>Results</span>
-                    <img id="results-popup">
-                </div>
-            </legend>
-            <div class="results-container">
-                <div id="results"></div>
-                <div id="results-warning">Oops, it seems that this combination isn't possible unless one of the skills is random ("Any" or "Random" options). Try another combination, leaving one of the fields as random.</div>
+            <div class="results-parent">
+                <fieldset>
+                    <legend>Results</legend>
+                    <div class="results-container" style="font-size: 13px">
+                        <div id="results"></div>
+                        <div id="results-warning" style="padding: 10px">Oops, it seems that this combination isn't possible unless one of the skills is random ("Any" or "Random" options). Try another combination, leaving one of the fields as random.</div>
+                    </div>
+                </fieldset>
             </div>
-        </fieldset>
-    </div>
-</div>
+        </div>
+            </center>
+        </div>
+    </section>
+</main>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="js/main.js"></script>
-<script src="js/index.js"></script>
 <script src="js/scroll.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/style.js"></script>
+<script>
+    $('.drop-btn').click(function (){
+        $('nav ul .drop-show').toggleClass("show");
+    });
+    $('.drop-btn2').click(function (){
+        $('nav ul .drop-show2').toggleClass("show");
+    });
+</script>
 </html>
