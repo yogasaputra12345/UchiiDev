@@ -58,23 +58,23 @@
             <div class="backblack" style="padding: 5px; position: relative;">
                 <table>
                     <tr>
-                        <td style='text-align: right'>Proficiency: </td>
+                        <td style='text-align: left'>Proficiency: </td>
                         <td style='text-align: left'><input type="number" id="proficiency" min="0" value=0></input></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>TEC: </td>
+                        <td style='text-align: left'>TEC: </td>
                         <td style='text-align: left'><input type="number" value=255 id='tec' min="0" max="255"></input></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>Equipment type: </td>
+                        <td style='text-align: left'>Equipment type: </td>
                         <td style='text-align: left'><select id="weap_arm" onchange="if (this.value === 'w') document.getElementById('recipe_pot').value = DEFAULT_WEAPON_RECIPE_POT; else document.getElementById('recipe_pot').value = DEFAULT_ARMOR_RECIPE_POT;"><option value='w'>Weapon</option><option value='a'>Armor</option></select></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>Recipe Potential: </td>
+                        <td style='text-align: left'>Recipe Potential: </td>
                         <td style='text-align: left'><input type="number" value=40 id='recipe_pot'></input></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>Starting Potential: </td>
+                        <td style='text-align: left'>Starting Potential: </td>
                         <td style='text-align: left'><input type="number" value=99 id='starting_pot'></input></td>
                     </tr>
                 </table>

@@ -11,6 +11,9 @@
         form{
             width: 90%;
         }
+        fieldset{
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -63,24 +66,24 @@
                 <center>
                 <table>
                     <tr>
-                        <td style='text-align: right'>Char Level: </td>
+                        <td style='text-align: left'>Char Level: </td>
                         <td style='text-align: left'><input type="number" id="level" min="1" value="1"/></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>Char Level (%): </td>
+                        <td style='text-align: left'>Char Level (%): </td>
                         <td style='text-align: left'><input type="number" id="level-percentage" min="0" max="99" value="0"/></td>
                     </tr>
                     <tr>
-                        <td style='text-align: right'>Target Level: </td>
+                        <td style='text-align: left'>Target Level: </td>
                         <td style='text-align: left'><input type="number" id="target-level" min="1"/></td>
                     </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center; padding: 5px; font-size: 15px;">
+                    <td colspan="2" style="text-align: center; padding: 10px; font-size: 15px;">
                         <strong>Total EXP required</strong>: <span id="xp-required"></span>
                     </td>
                 </tr>
                     <tr style="text-align: center;">
-                        <td><input type="radio" name="ui-select" id="mq-ui" data-selector="1" checked/>Main Quest</td>
+                        <td style="width: 50%"><input type="radio" name="ui-select" id="mq-ui" data-selector="1" checked/>Main Quest</td>
                         <td><input type="radio" name="ui-select" id="npc-ui" data-selector="2"/>NPC Quest</td>
                     </tr>
                     </table>
@@ -89,57 +92,47 @@
                             <legend class="v-align">
                                 <div>
                                     <span>NPC Quest</span>
-                                    <img id="quest-popup" class="question-mark"/>
                                 </div>
                             </legend>
-                            <div class="grid grid-1 quest-block">
+                            <div style="width: 90%">
                                 <div class="col-1">
-                                    <label for="quest-name">Quest</label>
+                                    <label for="quest-name">Quest: </label>
                                     <select id="quest-name"></select>
                                 </div>
-                            </div>
-
-                            <div class="grid grid-2">
-                                <div class="col-1">
-                                    <label for="quest-name">Exp</label>
+                                <div style="margin-top: 5px">
+                                    <label for="quest-name">EXP: </label>
                                     <input type="number" id="quest-exp" min="0"/>
                                 </div>
-                                <div class="col-2">
-                                    <label for="quest-times">How many times</label>
+                                <div style="margin-top: 5px"><p>Repeat this quest <strong><span id="target-times"></span> times</strong> to reach target level</p>
+                                </div>
+                                <div style="margin-top: 10px">
+                                    <label for="quest-times">How many times: </label>
                                     <input type="number" id="quest-times" min="0" value="1"/>
                                 </div>
-                            </div>
-
-                            <div class="quest-info">
-                                <p>
-                                    Repeat this quest <strong><span id="target-times"></span> times</strong> to reach target level
-                                </p>
-                                <p>
-                                    By doing this quest for <strong><span id="times-value"></span> times</strong>, you'll reach <strong>Level <span id="times-level"></span></strong>
-                                </p>
+                                <div style="margin: 5px 0"><p>By doing this quest for <strong><span id="times-value"></span> times</strong>, you'll reach <strong>Level <span id="times-level"></span></strong></p>
+                                </div>
                             </div>
                         </fieldset>
-
                         <fieldset id="mq-group" class="section ui-group">
                             <legend>Main Quest</legend>
-                            <div class="grid grid-1 nogap mq-block">
+                            <div style="width: 90%">
                                 <div class="col-1 grid grid-1 nogap">
-                                    <label class="col-1 text-center" for="mq-from">From</label>
+                                    <label class="col-1 text-center" for="mq-from">From: </label>
                                     <select class="col-1" id="mq-from"></select>
                                 </div>
 
-                                <div class="col-1 grid grid-1 nogap">
-                                    <label class="col-1 text-center" for="mq-until">Until</label>
+                                <div style="margin-top: 5px">
+                                    <label class="col-1 text-center" for="mq-until">Until: </label>
                                     <select class="col-1" id="mq-until"></select>
                                 </div>
 
-                                <div class="col-1 quest-info">
-                                    <p id="mq-xp"></p>
+                                <div style="margin: 5px 0">
+                                    <p style="font-size: 15px; margin: 10px" id="mq-xp"></p>
                                     <p id="mq-eval"></p>
                                     <br>
-                                    <p id="mq-startFrom"></p>
+                                    <p style="color: #28a745" id="mq-startFrom"></p>
                                     <br>
-                                    <p id="mq-stopAt"></p>
+                                    <p style="color: #007BFFFF" id="mq-stopAt"></p>
                                 </div>
                             </div>
                         </fieldset>
