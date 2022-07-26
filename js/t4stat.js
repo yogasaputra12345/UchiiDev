@@ -670,9 +670,9 @@ class Stat {
     updateMaterialCosts() {
         let buffer = `<table style="width: 100%; border-color: white;" border="1"><tr class="inverttable"><th style="width: 50%; padding: 3px; text-align: center">Mats</th><th style="text-align: center">Amount</th></tr>`
         for (let mat in this.mats) {
-            buffer += `<tr style="font-size: 14px;" ><td style="padding: 2px;">${mat}</td><td style="text-align: center">${this.mats[mat]}</td></tr>`;
+            buffer += `<tr style="font-size: 13px;" ><td style="padding: 2px;">${mat}</td><td style="text-align: center">${this.mats[mat]}</td></tr>`;
         }
-        buffer += `<tr style="font-size: 14px;" ><th style=" padding:2px;">Highest / Step</th><td style="text-align: center">${this.max_mats}</td></tr></table>`
+        buffer += `<tr style="font-size: 13px;" ><th style=" padding:2px;">Highest / Step</th><td style="text-align: center">${this.max_mats}</td></tr></table>`
 
         document.getElementById('material_display').innerHTML = buffer;
     }
@@ -1112,7 +1112,7 @@ class MainApp {
             const instance = this.stats[workspace_id]
             const focused = workspace_id === this.current;
 
-            buffer.push(`<div style="display: inline-block; border: solid 1px black; border-radius: 7px; padding: 3px;${focused ? ' background-color: #fec34d' :' background-color: none'}"><button style="border: none; background: none" onclick="App.setCurrent('${workspace_id}')">${workspace_id}</button><button onclick="App.despawn('${workspace_id}')" style="color: red; border: none; background: none">x</button></div>`);
+            buffer.push(`<div style="display: inline-block;border-radius: 6px; padding: 7px 10px;${focused ? ' background-color: #1c283e' :' background-color: none'}"><button style="border: none;font-size: 12px; color:white; background: none" onclick="App.setCurrent('${workspace_id}')">${workspace_id}</button><button onclick="App.despawn('${workspace_id}')" style="color: red; border: none; margin-left:5px; background: none">x</button></div>`);
         }
         return buffer.join(' ')
     }

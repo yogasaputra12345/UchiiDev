@@ -159,7 +159,7 @@ nav > ul > li:nth-child(1) {
     border-bottom: 0;
 }
 nav > ul > li:nth-child(1) a{
-    color: white;
+    color: #d3bc8e;
     font-size: 17px;
 }
 
@@ -210,19 +210,7 @@ nav > ul > li:last-child > p {
     opacity: 0;
     display: none;
 }
-.blackBackground{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    z-index: 0;
-    transform: translate(20rem);
-    transition: opacity .25s ease-in-out;
-    opacity: 0;
-    display: none;
-}
+
 .blackBackgroundOn{
     display:block;
     opacity:1;
@@ -349,6 +337,8 @@ h2::after {
     transform: rotateY(180deg);
 }
 
+h3{display: inline-flex;width: 100%;justify-content: center;padding-bottom: 0.5rem; font-size: 15px}
+
 section > img {
     display: flex;
     width: 100%;
@@ -388,6 +378,7 @@ section > ul {text-decoration: none;list-style: none;}
     border-radius: 0.04rem;
     text-decoration: none;
 }
+
 @media only screen and (min-width: 426px){
     html{
         display: none;

@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="author" content="Uchii">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Torampedia: Mq Calculator</title>
-    <link href="css/indexstyle.css" rel="stylesheet">
+    <title>Torampedia: Quest Calculator</title>
     <link href="css/fillstat.css" rel="stylesheet">
     <style>
         form{
@@ -15,32 +14,49 @@
 </head>
 <body>
 <header class="header-hidden">
-    <a href="#"><img src="img/logo.png" alt="Toram Logo"></a>
-    <a href="index.html">Torampedia</a>
+    <a style="width: 33.3%;" href="#"><img src="img/logo.png" alt="Toram Logo"></a>
+    <a href="https://yogasaputra12345.github.io/UchiiToram/">Torampedia</a>
     <button class="header-toggle"></button>
     <nav class="">
         <ul>
-            <li><button class="showClose"></button></li>
+            <li><div style="padding-left: 90%; padding-top: 11px;"><button style="margin-top: 3px" class="showClose"></button></div><a>MENU</a></li>
             <li><a href="index.html">Home</a></li>
+            <li><a href="Error/index.html">Guide & Pro Tips</a></li>
             <li><a href="Error/index.html">Equipment</a></li>
-            <li><a href="Error/index.html">Ninja Scroll Maker</a></li>
-            <li><a href="Error/index.html">Pot Calculator</a></li>
-            <li><a href="fillstator.html">Fillstator</a></li>
-            <li class="active"><a href="mq_calc.html">MQ Calculator</a></li>
-            <li><a href="Error/index.html">Bot WA Toram</a></li>
-            <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">About Me</a></li>
-            <li><a href="Error/index.html">Log in</a></li>
+            <li><a href="Error/index.html">Crysta</a></li>
+            <li><a href="Error/index.html">Monster List</a></li>
+            <li><a href="Error/index.html">Skill List</a></li>
+            <li><a class="drop-btn">Tools & Simulator</a>
+                <ul class="drop-show">
+                    <li><a href="Error/index.html">Character Leveling</a></li>
+                    <li><a href="Error/index.html">Lock Simulator</a></li>
+                    <li class="active"><a href="mq_calc.html">MQ & Sidequest Calculator</a></li>
+                    <li><a href="fillstator.html">Fillstator</a></li>
+                    <li><a href="pot_calc.html">Pot Craft Calculator</a></li>
+                    <li><a href="ninja_maker.html">Ninja Scroll Maker</a></li>
+                </ul>
+            </li>
+            <li><a class="drop-btn2">Others</a>
+                <ul class="drop-show2">
+                    <li><a href="Error/index.html">Stoodie Registlet</a></li>
+                    <li><a href="Error/index.html">Buff Food</a></li>
+                    <li><a href="Error/index.html">Monthly Dye</a></li>
+                </ul>
+            <li><a href="Error/index.html">Torampedia Forum</a></li>
+            <li><a href="https://wa.me/6285159199040/?text=Bot%20Info">Whatsapp & Discord Bot</a></li>
+            <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">Credits</a></li>
+            <li><p>Torampedia by ©Uchii. Toram Online by ©Asobimo, Inc. All Rights Reserved.</p></li>
         </ul>
     </nav>
     <div class="blackBackground"></div>
 </header>
 <main>
     <section class="home-1">
-        <div class="backblack">
-            <h2 id="title" style="text-align: center; color: white">Main Quest Calculator</h2>
-        </div>
-        <center>
-        <tr class="backblack" style="padding: 5px; position: relative;">
+        <div class="backblackz">
+            <h2 id="title" style="text-align: center;">Quest Calculator</h2>
+            <h3 style="text-align: center; color: white;">Quest_calc by Uchii</h3>
+        <center style="font-size: 13px">
+        <tr style="padding: 5px; position: relative;">
         <form>
 
                 <center>
@@ -58,7 +74,7 @@
                         <td style='text-align: left'><input type="number" id="target-level" min="1"/></td>
                     </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center; padding: 5px; font-size: 17px;">
+                    <td colspan="2" style="text-align: center; padding: 5px; font-size: 15px;">
                         <strong>Total XP required</strong>: <span id="xp-required"></span>
                     </td>
                 </tr>
@@ -88,7 +104,7 @@
                                     <input type="number" id="quest-exp" min="0"/>
                                 </div>
                                 <div class="col-2">
-                                    <label for="quest-times">N° of Times</label>
+                                    <label for="quest-times">How many times</label>
                                     <input type="number" id="quest-times" min="0" value="1"/>
                                 </div>
                             </div>
@@ -119,7 +135,9 @@
                                 <div class="col-1 quest-info">
                                     <p id="mq-xp"></p>
                                     <p id="mq-eval"></p>
+                                    <br>
                                     <p id="mq-startFrom"></p>
+                                    <br>
                                     <p id="mq-stopAt"></p>
                                 </div>
                             </div>
@@ -128,11 +146,20 @@
                     </center>
                 </form>
             </div>
+        </div>
     </section>
 </main>
 <script src="js/style.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/main.js"></script>
 <script src="js/mqmath.js"></script>
+<script>
+    $('.drop-btn').click(function (){
+        $('nav ul .drop-show').toggleClass("show");
+    });
+    $('.drop-btn2').click(function (){
+        $('nav ul .drop-show2').toggleClass("show");
+    });
+</script>
 </body>
 </html>

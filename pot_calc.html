@@ -1,107 +1,152 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Toram Tools</title>
-    <meta name="keywords" content="Toram Online, Tools, Crafting, Blacksmith, Simulator, Calculator"/>
-    <meta name="description" content="Toram Online's Crafting Simulator and Calculator by Insane23."/>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/blacksmith.css"/>
+    <meta charset="UTF-8">
+    <meta name="author" content="Uchii">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Torampedia: Potential Calculator</title>
+    <link href="css/fillstat.css" rel="stylesheet">
+    <style>
+        form{
+            width: 90%;
+        }
+    </style>
 </head>
 <body>
-<div class="header">
-    <a href="index.html"><div class="header-title">Blacksmith Crafting Calculator</div></a>
-</div>
-
-<form class="container main">
-    <fieldset class="section">
-        <legend>Base Stats</legend>
-        <div class="grid grid-3">
-            <div class="col-1">
-                <label for="STR">STR</label>
-                <input class="small-input" id="STR" type="number" min="1"/>
-            </div>
-            <div class="col-2">
-                <label for="INT">INT</label>
-                <input class="small-input" id="INT" type="number" min="1"/>
-            </div>
-            <div class="col-3">
-                <label for="VIT">VIT</label>
-                <input class="small-input" id="VIT" type="number" min="1"/>
-            </div>
-
-            <div class="col-1">
-                <label for="DEX">DEX</label>
-                <input class="small-input" id="DEX" type="number" min="1"/>
-            </div>
-            <div class="col-2">
-                <label for="AGI">AGI</label>
-                <input class="small-input" id="AGI" type="number" min="1"/>
-            </div>
-            <div class="col-3">
-                <label for="TEC">TEC</label>
-                <input class="small-input" id="TEC" type="number" min="1"/>
-            </div>
-        </div>
+<header class="header-hidden">
+    <a style="width: 33.3%;" href="#"><img src="img/logo.png" alt="Toram Logo"></a>
+    <a href="https://yogasaputra12345.github.io/UchiiToram/">Torampedia</a>
+    <button class="header-toggle"></button>
+    <nav class="">
+        <ul>
+            <li><div style="padding-left: 90%; padding-top: 11px;"><button style="margin-top: 3px" class="showClose"></button></div><a>MENU</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Error/index.html">Guide & Pro Tips</a></li>
+            <li><a href="Error/index.html">Equipment</a></li>
+            <li><a href="Error/index.html">Crysta</a></li>
+            <li><a href="Error/index.html">Monster List</a></li>
+            <li><a href="Error/index.html">Skill List</a></li>
+            <li><a class="drop-btn">Tools & Simulator</a>
+                <ul class="drop-show">
+                    <li><a href="Error/index.html">Character Leveling</a></li>
+                    <li><a href="Error/index.html">Lock Simulator</a></li>
+                    <li><a href="mq_calc.html">MQ & Sidequest Calculator</a></li>
+                    <li><a href="fillstator.html">Fillstator</a></li>
+                    <li class="active"><a href="pot_calc.html">Pot Craft Calculator</a></li>
+                    <li><a href="ninja_maker.html">Ninja Scroll Maker</a></li>
+                </ul>
+            </li>
+            <li><a class="drop-btn2">Others</a>
+                <ul class="drop-show2">
+                    <li><a href="Error/index.html">Stoodie Registlet</a></li>
+                    <li><a href="Error/index.html">Buff Food</a></li>
+                    <li><a href="Error/index.html">Monthly Dye</a></li>
+                </ul>
+            <li><a href="Error/index.html">Torampedia Forum</a></li>
+            <li><a href="https://wa.me/6285159199040/?text=Bot%20Info">Whatsapp & Discord Bot</a></li>
+            <li><a href="https://github.com/yogasaputra12345/UchiiToram#uchiitoram">Credits</a></li>
+            <li><p>Torampedia by ©Uchii. Toram Online by ©Asobimo, Inc. All Rights Reserved.</p></li>
+        </ul>
+    </nav>
+    <div class="blackBackground"></div>
+</header>
+<main>
+    <section class="home-1">
+        <div class="backblack">
+        <h2 id="title" style="text-align: center;">Pot Calculator</h2>
+        <h3 style="text-align: center; color: white;">Pot_calc by Uchii</h3>
+            <center>
+        <form>
+            <fieldset>
+                <legend>Base Stats</legend>
+                <table>
+                    <tr>
+                        <td><label>STR: </label></td>
+                        <td><input class="small-input" id="STR" type="number" min="1"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>INT: </label></td>
+                        <td><input class="small-input" id="INT" type="number" min="1"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>VIT: </label></td>
+                        <td><input class="small-input" id="VIT" type="number" min="1"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>AGI: </label></td>
+                        <td><input class="small-input" id="AGI" type="number" min="1"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>DEX: </label></td>
+                        <td><input class="small-input" id="DEX" type="number" min="1"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>TEC: </label></td>
+                        <td><input class="small-input" id="TEC" type="number" min="1"/></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Total Equipment Stats</legend>
+                <table>
+                    <tr>
+                        <td><label>STR: </label></td>
+                        <td><input class="small-input" id="eSTR" type="number" min="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>STR (%): </label></td>
+                        <td><input class="small-input" id="eSTRp" type="number" min="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>DEX: </label></td>
+                        <td><input class="small-input" id="eDEX" type="number" min="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>DEX (%): </label></td>
+                        <td><input class="small-input" id="eDEXp" type="number" min="0"/></td>
+                    </tr>
+                </table>
     </fieldset>
-
-    <fieldset class="section">
-        <legend>Equipament Stats</legend>
-        <div class="grid grid-2">
-            <div class="col-1">
-                <label for="eSTR">STR</label>
-                <input class="small-input" id="eSTR" type="number" min="0"/>
-            </div>
-            <div class="col-2">
-                <label for="eSTR%">STR%</label>
-                <input class="small-input" id="eSTRp" type="number" min="0"/>
-            </div>
-
-            <div class="col-1">
-                <label for="eDEX">DEX</label>
-                <input class="small-input" id="eDEX" type="number" min="0"/>
-            </div>
-            <div class="col-2">
-                <label for="eDEX%">DEX%</label>
-                <input class="small-input" id="eDEXp" type="number" min="0"/>
-            </div>
-        </div>
-    </fieldset>
-
-    <fieldset class="section crafting-type">
-        <legend>Craft Type</legend>
-        <label for="craft-type">Type</label>
-        <select id="craft-type">
-            <option value="Armor">Armor</option>
-            <option value="1H Sword">1H Sword</option>
-            <option value="2H Sword">2H Sword</option>
-            <option value="Bow">Bow</option>
-            <option value="Bowgun">Bowgun</option>
-            <option value="Staff">Staff</option>
-            <option value="Magic Device">Magic Device</option>
-            <option value="Knuckle">Knuckle</option>
-            <option value="Halberd">Halberd</option>
-            <option value="Katana">Katana</option>
+            <fieldset>
+                <legend>Craft Type</legend>
+                <table>
+                    <tr>
+                        <td><label for="craft-type">Type: </label></td>
+                        <td><select id="craft-type">
+                            <option value="Armor">Armor</option>
+                            <option value="1H Sword">1H Sword</option>
+                            <option value="2H Sword">2H Sword</option>
+                            <option value="Bow">Bow</option>
+                            <option value="Bowgun">Bowgun</option>
+                            <option value="Staff">Staff</option>
+                            <option value="Magic Device">Magic Device</option>
+                            <option value="Knuckle">Knuckle</option>
+                            <option value="Halberd">Halberd</option>
+                            <option value="Katana">Katana</option>
+                        </td>
+                    </tr>
+                </table>
         </select>
     </fieldset>
-
-    <fieldset class="section">
-        <legend>Skill Level</legend>
-        <div class="grid grid-3 skill-block">
-            <label class="col-1" for="create-equipment">Create Equipment</label>
-            <label class="col-2" for="careful-creation">Careful Creation</label>
-            <label class="col-3" for="expert-creation">Expert's Creation</label>
-
-            <input class="small-input col-1" id="create-equipment" type="number" min="1" value="10"/>
-            <input class="small-input col-2" id="careful-creation" type="number" min="1" value="10"/>
-            <input class="small-input col-3" id="expert-creation" type="number" min="1" value="10"/>
-            <div></div>
-        </div>
+            <fieldset>
+                <legend>Skill Level</legend>
+                <table>
+                    <tr>
+                        <td style="width: 50%;"><label>Create Equipment: </label></td>
+                        <td><input id="create-equipment" type="number" min="1" value="10"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Careful Creation: </label></td>
+                        <td><input id="careful-creation" type="number" min="1" value="10"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Expert's Creation: </label></td>
+                        <td><input id="expert-creation" type="number" min="1" value="10"/></td>
+                    </tr>
+                </table>
     </fieldset>
-
-    <fieldset class="section">
-        <legend class="v-align">
+            <fieldset>
+        <legend>
             <div>
                 <span>Crafting Stats</span>
                 <img class="question-mark" id="crafting-popup">
@@ -143,10 +188,23 @@
             You can't craft this item because <span> equipment difficulty &gt; your difficulty</span>.
         </div>
     </fieldset>
-</form>
-
+        </form>
+            </center>
+        </div>
+    </section>
+</main>
 </body>
 <script src="js/jquery.js"></script>
 <script src="js/main.js"></script>
 <script src="js/blacksmith.js"></script>
+<script src="js/style.js"></script>
+<script>
+    $('.drop-btn').click(function (){
+        $('nav ul .drop-show').toggleClass("show");
+    });
+    $('.drop-btn2').click(function (){
+        $('nav ul .drop-show2').toggleClass("show");
+    });
+</script>
+
 </html>

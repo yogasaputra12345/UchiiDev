@@ -132,7 +132,7 @@ const splitMqInfo = function () {
             currentChapter += 1;
         }
         else {
-            mqKeys.push(`CH${currentChapter} - ${keys[i]}`);
+            mqKeys.push(`Chapter ${currentChapter} - ${keys[i]}`);
             mqValues.push(i);
         }
     }
@@ -232,7 +232,7 @@ const evaluateMQ = function () {
 
         if (mqStopAt) {
             let quest = $(`#mq-until option[value="${mqStopIndex}"]`).text();
-            $("#mq-stopAt").html(`You may <strong>stop</strong> after quest <strong>${quest}</strong> to reach target level`);
+            $("#mq-stopAt").html(`Or, you may <strong>stop</strong> after quest <em>${quest}</em> to reach target level`);
         }
         else {
             $("#mq-stopAt").html("");
@@ -240,7 +240,7 @@ const evaluateMQ = function () {
 
         if (mqStartFrom) {
             let quest = $(`#mq-until option[value="${mqStartIndex}"]`).text();
-            $("#mq-startFrom").html(`You may <strong>start</strong> from quest <strong>${quest}</strong> to reach target level`);
+            $("#mq-startFrom").html(`You may <strong>start</strong> from quest <em>${quest}</em> until target quest to reach target level`);
         }
         else {
             $("#mq-startFrom").html("");
