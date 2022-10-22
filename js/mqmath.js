@@ -144,7 +144,7 @@ const splitMqInfo = function () {
 $(document).ready(function () {
     $("#target-level").val(LV_CAP);
     $("#quest-name").html(fillOptions(Object.values(quest_data), Object.keys(quest_data)));
-    $("#quest-name").val("15000000").trigger("input");
+    $("#quest-name").val("1500000").trigger("input");
     let [keys, vals] = splitMqInfo();
     $("#mq-from").html(fillOptions(vals, keys));
     $("#mq-until").html(fillOptions(vals.reverse(), keys.reverse()));
