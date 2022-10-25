@@ -30,16 +30,16 @@ function bonusexp(xp, PlayerLv, BossLv) {
         return `${xp}`;
     }
 }
-function bosstemplate(data0) {
+function bosstemplate(RawData) {
     return `
       <div class="animal">
-      <img class="pet-photo" src="${data0.picture}">
-      <h2 class="pet-name"><a href="https://toram-id.info/monster/${data0.id}">${data0.name} 
-      <span class="species">(${bonusexp(data0.xp, PlayerLvl.value, data0.level)} EXP)</span></a></h2>
-      <p><strong>Level:</strong> ${data0.level}</p>
-      <p><strong>Element:</strong> ${data0.element.name}</p>
-      <p><strong>HP:</strong> ${data0.hp}</p>
-      <p><strong>Location:</strong> ${data0.map.name}</p>
+      <img class="pet-photo" src="${RawData.picture}">
+      <h2 class="pet-name"><a href="https://toram-id.info/monster/${RawData.id}">${RawData.name} 
+      <span class="species">(${bonusexp(RawData.xp, PlayerLvl.value, RawData.level)} EXP)</span></a></h2>
+      <p><strong>Level:</strong> ${RawData.level}</p>
+      <p><strong>Element:</strong> ${RawData.element.name}</p>
+      <p><strong>HP:</strong> ${RawData.hp}</p>
+      <p><strong>Location:</strong> ${RawData.map.name}</p>
       </div>
     `;
 }
