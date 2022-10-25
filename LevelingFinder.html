@@ -7,20 +7,9 @@
 	<title>Torampedia: Leveling Finder</title>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src ="js/jquery.js"></script>
-	<script src="js/axios.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
     <link href="css/fillstat.css" rel="stylesheet">
-	<style>
-		ul#list{
-			font-size: 12px;
-			list-style-type: none;
-			margin: 3.6rem 20px 0px 20px;
-			position: relative;
-		}
-		ul#list>li{
-			margin-bottom: 10px;
-		}
-	</style>
+	<link href="css/divlvling.css" rel="stylesheet">
 </head>
 <body>
 	<header class="header-hidden">
@@ -65,7 +54,9 @@
 			<div class="backblack">
 				<h2 id="title" style="text-align: center;">Leveling Finder</h2>
     			<h3 style="text-align: center; color: white;">Lv Finder by Uchii</h3>
-				<ul id="list"></ul>
+				<input type="number" id="level" name="level" value="" /><button type="submit" id="sb">Cari</button>
+				<div id="app"></div>
+				<script src="/js/axios.js"></script>
 			</div>
 		</section>
 	</main>
