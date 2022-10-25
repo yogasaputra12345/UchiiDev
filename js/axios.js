@@ -1,11 +1,11 @@
-const BOSSTYPE = {'-1': 'Boss', '0': 'Miniboss', '1': 'Normal Monster',};
 var PlayerLvl = document.getElementById('level')
-const rawlv = PlayerLvl.value;
 var Submit = document.getElementById('sb')
-function searchfunc(){
+const sb = document.querySelector('#framework')
+const rawlv = PlayerLvl.value;
+function searchfunct(){
     const token = "17|2bjIThBL1nVrE8fDjPTygHbp8GtTyuTO8NMdmsmx"
     const auth = {headers : {Authorization :`Bearer ` + token}}
-    axios.get(`https://toram-id.info/api/v1/monsters/3?level=${PlayerLvl.value}&bonusexp=0&between=9`, auth)
+    axios.get(`https://toram-id.info/api/v1/monsters/${sb.value}?level=${PlayerLvl.value}&bonusexp=0&between=9`, auth)
         .then(response => {
             const users = response.data.data;
             const sorted = users.sort((elem1, elem2) => elem2.xp - elem1.xp )
@@ -30,13 +30,13 @@ function bonusexp(xp, PlayerLv, BossLv) {
         return `${xp}`;
     }
 }
-Submit.addEventListener('click', searchfunc);
+Submit.addEventListener('click', searchfunct);
 function bosstemplate(RawData) {
     return `
       <div class="animal">
       <img class="pet-photo" src="${RawData.picture}">
-      <h2 class="pet-name"><a href="https://toram-id.info/monster/${RawData.id}">${RawData.name} 
-      <span class="species">(${bonusexp(RawData.xp, rawlv, RawData.level)} EXP)</span></a></h2>
+      <h4 class="pet-name"><a href="https://toram-id.info/monster/${RawData.id}">${RawData.name} 
+      <span class="species">(${bonusexp(RawData.xp, rawlv, RawData.level)} EXP)</span></a></h4>
       <p class="infoboss"><strong>Level:</strong> ${RawData.level}</p>
       <p class="infoboss"><strong>Elemen:</strong> ${RawData.element.name}</p>
       <p class="infoboss"><strong>HP:</strong> ${RawData.hp}</p>

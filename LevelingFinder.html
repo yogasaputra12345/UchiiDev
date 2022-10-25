@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Torampedia: Leveling Finder</title>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 	<script src ="js/jquery.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" crossorigin="anonymous">
     <link href="css/fillstat.css" rel="stylesheet">
@@ -63,15 +64,19 @@
 								<label>Level Player: </label>
 							</td>
 							<td>
-								<input type="number" id="level" name="level" value=""/>
+								<input min="1" max="255" maxlength="3" type="number" id="level" name="level" value=""/>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<label>Tipe Monster: </label>
+								<label for="framework">Tipe Monster: </label>
 							</td>
 							<td>
-								<select id="bosstype" data-prev="-1"></select>
+								<select id="framework">
+									<option value="3">Boss</option>
+									<option value="2">Miniboss</option>
+									<option value="1">Monster Biasa</option>
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -83,9 +88,12 @@
 							</td>
 						</tr>
 					</table>
-					<button type="submit" id="sb">Cari</button>
+					<button class="btn btn-success" type="submit" id="sb">Cari</button>
 				</fieldset>
-				<div id="app"></div>
+					<fieldset>
+						<legend>Results</legend>
+						<div id="app"></div>
+					</fieldset>
 				</center>
 				<script src="js/axios.js"></script>
 			</div>
