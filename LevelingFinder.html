@@ -53,10 +53,41 @@
 		<section class="home-1">
 			<div class="backblack">
 				<h2 id="title" style="text-align: center;">Leveling Finder</h2>
-    			<h3 style="text-align: center; color: white;">Lv Finder by Uchii</h3>
-				<input type="number" id="level" name="level" value="" /><button type="submit" id="sb">Cari</button>
+    			<h3 style="text-align: center; color: white; font-size: 12px">Code by Uchii, Data by toram-id</h3>
+				<center>
+				<fieldset>
+					<legend>Torampedia</legend>
+					<table>
+						<tr>
+							<td style="width: 40%">
+								<label>Level Player: </label>
+							</td>
+							<td>
+								<input type="number" id="level" name="level" value=""/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Tipe Monster: </label>
+							</td>
+							<td>
+								<select id="bosstype" data-prev="-1"></select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Bonus Exp: </label>
+							</td>
+							<td>
+								<input id="expbonus" data-prev="-1">
+							</td>
+						</tr>
+					</table>
+					<button type="submit" id="sb">Cari</button>
+				</fieldset>
 				<div id="app"></div>
-				<script src="/js/axios.js"></script>
+				</center>
+				<script src="js/axios.js"></script>
 			</div>
 		</section>
 	</main>
