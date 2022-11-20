@@ -1,0 +1,3026 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Uchii">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Torampedia: Skill Data Blade</title>
+    <link href="css/skilldata.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <h2 id="title" style="text-align: center;">Skill Data: Pedang</h2>
+    <h3 style="text-align: center; color: white; font-size: 12px">Code by Uchii, Data by coryn.club</h3>
+</div>
+<div class="card-container-1">
+    <center>
+        <fieldset>
+        <legend>Hard Hit</legend>
+        <div style="margin:5px 0px 15px">
+        <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+            <div style="align-self:center">
+                    <img src='https://indo.coryn.club/skill/blade/hardhit.png' width='45' height='45'/>
+                <p class="tier">(Skill Tier 1)</p>
+            </div>
+            <div style="justify-self:end;">
+                <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                <br> 2-Handed Sword/1-Handed Sword only
+            </div>
+        </div>
+        <hr>
+        <div class="monster-prop">
+            <div>
+            <p class="accent-bold">Type</p>
+            <p>Active, Physical skill</p>
+            </div>
+        <div>
+            <p class="accent-bold">Element</p>
+            <p>Weapon Dependent</p>
+        </div>
+        <div>
+            <p class="accent-bold">MP</p>
+            <p>100</p>
+        </div>
+        <div>
+            <p class="accent-bold">Combo start</p>
+            <p>Yes</p>
+        </div>
+        <div>
+            <p class="accent-bold">Combo middle</p>
+            <p>Yes</p>
+        </div>
+        <div>
+            <p class="accent-bold">Range</p>
+            <p>2</p>
+        </div>
+        <div class="span-2">
+            <p class="accent-bold">Description</p>
+            <p style="margin-top: 5px;">Brutally hit the target with the weapon. Chance to inflict [Flinch] on the target.</p>
+        </div>
+        <div class="span-3">
+            <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                <p style="padding-right:10px">1-Handed Sword</p>
+            </div>
+            <p>Flinch Rate +50%</p>
+        </div>
+        <div class="span-3">
+            <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                <p style="padding-right:10px">2-Handed Sword</p>
+            </div>
+            <p>Power +50</p>
+        </div>
+    </div>
+            <hr>
+            <p class="accent-bold">Extras</p>
+            <p><details><summary>Show more...</summary>
+            <br>
+            <table class="skill-table">
+                <tr>
+                    <td width="50%">
+                        <span class = "sub-title">Weapon:</span>
+                    </td>
+                    <td>
+                        <select id = "hardHitWeapon" onchange = "calcHardHitValue()">
+                            <option value = "1H" selected>1-Handed Sword</option>
+                            <option value = "2H">2-Handed Sword</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class = "sub-title">Skill Level:</span>
+                    </td>
+                    <td>
+                        <select id = "hardHitLevel" onchange = "calcHardHitValue()">
+                            <option value = "1">1</option><option value = "2">2</option><option value = "3">3</option><option value = "4">4</option><option value = "5">5</option><option value = "6">6</option><option value = "7">7</option><option value = "8">8</option><option value = "9">9</option><option value = "10" selected>10</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class = "sub-title">"Hard Hit Enhancer" Registlet Level:</span></td>
+                    <td>
+                        <select id = "hardHitRegistlet" onchange = "calcHardHitValue()">
+                            <option value = "0" selected>0</option><option value = "1">1</option><option value = "2">2</option><option value = "3">3</option><option value = "4">4</option><option value = "5">5</option><option value = "6">6</option><option value = "7">7</option><option value = "8">8</option><option value = "9">9</option><option value = "10">10</option><option value = "11">11</option><option value = "12">12</option><option value = "13">13</option><option value = "14">14</option><option value = "15">15</option><option value = "16">16</option><option value = "17">17</option><option value = "18">18</option><option value = "19">19</option><option value = "20">20</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <div style="text-align:left;width:90%">
+                <span id = "hardHitValue"></span>
+            </div>
+            <br>
+            <script>
+function calcHardHitConstant(level, result) {
+    var constant = 50 + 5*level
+    constant = Math.floor(constant)
+    //put back into HTML section
+    result.innerHTML = `<li><b>Skill Constant:</b> ${constant} </li>`
+}
+
+function calcHardHitMultiplier(level, registlet, weapon, result) {
+    var multiplier = 1 + (0.05 * level) + (0.05 * registlet)
+    //+0.5 mult bonus for 2hs
+    if (weapon == "2H") {multiplier += 0.5}
+    if (multiplier - Math.floor(multiplier*100)/100 < 0.0099) {multiplier = Math.floor(multiplier*100)/100}
+    else {multiplier = Math.round(multiplier*100)/100}
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${multiplier}</li><br>`
+}
+
+function calcAilmentChanceHardHit(level, weapon, result)
+    {//Base values for Hard Hit
+    var baseChance = 5;
+    var bonusChance = 50;
+    var levelChance = 4.5;
+
+    //Calculating chance
+    var chance = baseChance;
+    //The next "if" is pretty much required; the game uses a weird function called Math.RoundToInt, and only for Hard Hit; go figure why
+    //If the number has no decimal, there's nothing left to do
+    if(levelChance * level == (levelChance * level).toFixed(0)) {
+  	    chance += parseInt((levelChance * level).toFixed(0), 10);
+	    //If the decimal part is equal to 0.5 (it will be either 0 or 0.5), then the game rounds it up or down to the nearest even number
+    }
+    else if((levelChance * level).toFixed(0) % 2 == 0) {
+        //Checking if the rounded up number is even
+        chance += parseInt((levelChance * level).toFixed(0), 10);
+    }
+    else {
+        //If it's odd, then round it down
+        chance += parseInt((levelChance * level).toFixed(0)) - 1;
+    }
+    //Bonus chance for 1H
+    if(weapon == "1H") {chance += bonusChance;}
+    result.innerHTML += `<li><b>Flinch Chance:</b> ${chance}% </li>`
+}
+
+function addAilmentInfo(result) {
+    result.innerHTML += `<li><b>Flinch Duration:</b> 2 seconds</li>
+    <li><b>Resistance Duration on Difficulties:</b> 1 second (<b>Easy</b> and <b>Normal</b>); 3 seconds (<b>Hard</b>); 6 seconds (<b>Nightmare</b>); 9 seconds (<b>Ultimate</b>)</li>`
+}
+
+function calcHardHitValue(){
+    //Get information of weapon and level from selectors
+    let weaponSelector = document.getElementById("hardHitWeapon");
+    let weapon = weaponSelector[weaponSelector.selectedIndex].value;
+    let levelSelector = document.getElementById("hardHitLevel");
+    let level = levelSelector[levelSelector.selectedIndex].value;
+    let registletSelector = document.getElementById("hardHitRegistlet");
+    let registlet = registletSelector[registletSelector.selectedIndex].value;
+    let result = document.getElementById("hardHitValue");
+    calcHardHitConstant (level, result)
+    calcHardHitMultiplier(level, registlet, weapon, result)
+    calcAilmentChanceHardHit(level, weapon, result)
+    addAilmentInfo(result)
+    result.innerHTML += `<br> <span> This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b></span>`
+}
+
+calcHardHitValue();
+</script>
+        </details></p>
+        </div>
+    </fieldset>
+        <fieldset>
+            <legend>Astute</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/astute.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 1)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>P1T: 100; P2T: 200</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Strongly hit the target in rapid motion. Critical Rate +25 when this skill is activated.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Mp Cost -100</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Power +50<br> Boost on Critical Rate Buff</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <span class = "sub-title">Weapon:</span>
+                        </td>
+                        <td>
+                            <select id = "astuteWeapon" onchange = "calcAstuteValues()">
+                                <option value = "1H" selected>1-Handed Sword</option>
+                                <option value = "2H">2-Handed Sword</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class = "sub-title">Skill Level:</span>
+                        </td>
+                        <td>
+                            <select id = "astuteLevel" onchange = "calcAstuteValues()">
+                            <option value = "1">1</option>
+                            <option value = "2">2</option>
+                            <option value = "3">3</option>
+                            <option value = "4">4</option>
+                            <option value = "5">5</option>
+                            <option value = "6">6</option>
+                            <option value = "7">7</option>
+                            <option value = "8">8</option>
+                            <option value = "9">9</option>
+                            <option value = "10" selected>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <div style="text-align:left;width:90%">
+                <span id = "astuteValues"></span>
+                </div>
+                <script>
+function calcAstuteMpCost(weapon, result) {
+	var cost = 200
+	if (weapon == "1H") {cost -= 100}
+	//Writing the results
+	result.innerHTML = `<li><b>MP Cost:</b> ${cost}</li>`
+}
+
+function calcAstuteConstant(level, result) {
+    var constant = 150 + 5*level
+    constant = Math.floor(constant)
+    //put back into HTML section
+    result.innerHTML += `<li><b>Skill Constant:</b> ${constant} </li>`
+}
+
+function calcAstuteMultiplier(level, weapon, result) {
+    var multiplier = 1.5 + (0.1 * level)
+    if (weapon == "2H") {multiplier += 0.5}
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${multiplier}</li>`
+}
+
+function calcAstuteMotionSpeed(level, result){
+	var motionSpeed = 5 * level;
+	//Writing the results
+	result.innerHTML += `<br><li><b>Motion Speed</b> of <b>Astute</b> +${motionSpeed}%</li>`;
+}
+
+function calcAstuteCrit(weapon, result) {
+	var crit = 25
+	if (weapon == "2H") {crit *= 2}
+	//Writing the results
+    result.innerHTML += `<li>Grants <b>Astute buff</b> upon successful cast</li>
+    <br><b>Buff Effect:</b>
+    <li><b>Critical Rate</b> +${crit}</li>`
+}
+
+function calcAstuteBuffDuration(level, result){
+	var duration = 5
+	if(level > 5) {duration *= 2}
+	//Writing the results
+	result.innerHTML += `<li><b>Buff Duration:</b> ${duration} seconds</li>`;
+}
+
+function calcAstuteValues(){
+	let weaponSelector = document.getElementById("astuteWeapon");
+	let weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	let levelSelector = document.getElementById("astuteLevel");
+	let level = levelSelector[levelSelector.selectedIndex].value;
+	let result = document.getElementById("astuteValues");
+	calcAstuteMpCost(weapon, result)
+	calcAstuteConstant(level, result)
+	calcAstuteMultiplier(level, weapon, result)
+	calcAstuteMotionSpeed(level, result)
+    calcAstuteCrit(weapon, result)
+	calcAstuteBuffDuration(level, result)
+    result.innerHTML += `<br>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b>`
+
+}
+calcAstuteValues();
+</script>
+            </details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Trigger Slash</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/tiggerslash.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 2)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Fire</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>Lv1-5: 300mp; Lv6-10: 200mp</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Put power while slashing the target. Enhance Attack MP Heal until the next skill. The motion speeds up one time by this skill.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Perfect Aim</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Power +100</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <span class = "sub-title">Weapon:</span>
+                        </td>
+                        <td>
+                            <select id = "triggerWeapon" onchange = "calcTriggerValues()">
+                                <option value = "1H" selected>1-Handed Sword</option>
+                                <option value = "2H">2-Handed Sword</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class = "sub-title">Skill Level:</span>
+                        </td>
+                        <td>
+                            <select id = "triggerLevel" onchange = "calcTriggerValues()">
+                                <option value = "1">1</option>
+                                <option value = "2">2</option>
+                                <option value = "3">3</option>
+                                <option value = "4">4</option>
+                                <option value = "5">5</option>
+                                <option value = "6">6</option>
+                                <option value = "7">7</option>
+                                <option value = "8">8</option>
+                                <option value = "9">9</option>
+                                <option value = "10" selected>10</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <span class = "sub-title">"Elemental Trigger Slash" Registlet equipped:</span>
+                <input type = "checkbox" id = "triggerSlashElement" onchange = "calcTriggerValues()">
+                <div style="text-align:left;width:90%">
+                    <span id = "triggerValues"></span>
+                </div>
+                <script>
+function calcTriggerSlashMpCost(level, result) {
+	var baseCost = 300;
+	var cost = baseCost;
+	if(level > 5) {cost -= 100;}
+	result.innerHTML = `<li><b>MP Cost:</b> ${cost}</li>`;
+}
+
+function calcTriggerSlashConstant(level, result) {
+    var constant = 200 + 10 * level
+    constant = Math.floor(constant)
+    //put back into HTML section
+    result.innerHTML += `<li><b>Skill Constant:</b> ${constant} </li>`
+}
+
+function calcTriggerSlashMultiplier(level, weapon, result) {
+    var skillMultiplier = 1.5 + (0.05 * level)
+    if (weapon == "2H") {skillMultiplier += 1}
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${skillMultiplier}</li><br>`
+}
+
+function addTriggerSkillEffect(weapon, registlet, result) {
+	//Adding perfect aim info (only for 1H)
+	var perfectAimInfo = ``;
+	if(weapon == "1H") {perfectAimInfo += `<li>This skill has the <b>Perfect Aim</b> attribute: it cannot [Miss] or [Graze], but can be [Evaded]</li>`}
+	result.innerHTML += perfectAimInfo;
+	if(registlet) {result.innerHTML += `<li><b>Registlet effect:</b> Trigger Slash's element is changed to <b>Weapon Dependent</b></li>`}
+	result.innerHTML += `<li>Grants <b>Trigger Slash buff</b> upon successful cast</li>`
+}
+
+function calcTriggerAMPR(level, result) {
+	var AMPR = 2 * level;
+	result.innerHTML += `<li><b>Attack MP Recovery</b> +${AMPR}</li>`;
+}
+
+function addTriggerMotionSpeedInfo(result) {
+    result.innerHTML += `<li>Sets the next skill's <b>Motion Speed</b> to +50%; <b>overrides</b> other <b>Motion Speed</b> effects such as <b>[Freeze]</b>, <b>Swift combo tag</b> or <b>Chain Cast</b>.</li>
+    <li><b>Buff Duration:</b> Until a skill is used</li>`
+}
+
+function calcTriggerValues() {
+    var weaponSelector = document.getElementById("triggerWeapon");
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+    var levelSelector = document.getElementById("triggerLevel");
+    var level = levelSelector[levelSelector.selectedIndex].value;
+    var registlet = document.getElementById("triggerSlashElement").checked;
+	var result = document.getElementById("triggerValues");
+	calcTriggerSlashMpCost(level, result);
+	calcTriggerSlashConstant(level, result);
+	calcTriggerSlashMultiplier(level, weapon, result);
+	addTriggerSkillEffect(weapon, registlet, result);
+    result.innerHTML += `<br> <span><b>Buff Effect:</b></span>`
+	calcTriggerAMPR(level, result);
+    addTriggerMotionSpeedInfo(result);
+    result.innerHTML += `<br>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b>`
+}
+
+calcTriggerValues();
+</script>
+            </details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Rampage</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/rampage.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 3)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>500</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>0</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Furiously and consecutively attack a target. Greatly enchance normal attacks 10 times and a strong attack will be activated after that.<br>
+                            Unable to be used redundantly.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Normal Attack Power +5 - +50</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Finish Blow +400</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b></span>
+                <select id = "rampageWeapon" onchange = "calcRampageValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "rampageLevel" onchange = "calcRampageValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>"Remedial Rampage" Registlet Level:</b> </span>
+                <select id = "rampageRegistlet" onchange = "calcRampageValues()">
+                    <option value = "0" selected>0</option>
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10">10</option>
+                </select><br>
+                <br>
+                <div style="text-align:left;width:90%">
+                <span id = "rampageValues"></span>
+                </div>
+
+                <script>
+function calcRampageAutoAttack(level, registlet, weapon, result) {
+    var constantAA = 10 * level
+    constantAA = Math.floor(constantAA)
+
+    var skillMultiplierAA = 0.1 + (0.04 * level)
+    if (weapon == "1H" || weapon == "DW") {skillMultiplierAA += 0.05 * level}
+    skillMultiplierAA = Math.round(skillMultiplierAA*100)/100
+
+    var atkCount = ``
+    if (registlet > 0) {atkCount += `Next 11`}
+    else {atkCount += `First 10`}
+    //put back into HTML section
+    if (weapon == "DW") {result.innerHTML = `<li><b>${atkCount} Auto Attacks Skill Constant increase: </b> ${constantAA}; total constant for all hits, <font style = 'color: #C70039'>only apply to main hand damage</font style></li>
+    <li><b>${atkCount} Auto Attacks Skill Multiplier increase: </b> ${skillMultiplierAA}; total multiplier for all hits, <font style = 'color: #C70039'>only apply to main hand damage</font style></li>
+    <li><b>${atkCount} Auto Attacks Hit Count:</b> 7 hits; damage calculation is done once, then divided between the hits alongside the sub-hand damage</li>`;}
+    else {result.innerHTML = `<li><b>${atkCount} Auto Attacks Skill Constant increase: </b> ${constantAA}; total constant for all hits </li>
+    <li><b>${atkCount} Auto Attacks Skill Multiplier increase: </b> ${skillMultiplierAA}; total multiplier for all hits</li>
+    <li><b>${atkCount} Auto Attacks Hit Count:</b> 4 hits; damage calculation is done once, then divided between the hits</li>`}
+}
+
+function calcRampageFinalHit(level, registlet, weapon, result) {
+    var constantFinal = 300 + 20 * level
+    constantFinal = Math.floor(constantFinal)
+
+    var skillMultiplierFinal1 = 0.5 + (0.05 * level)
+    var skillMultiplierFinal2 = 2.5 + (0.05 * level)
+    var heal = 50 * registlet
+
+    if (weapon == "2H") {
+        skillMultiplierFinal1 += 1
+        skillMultiplierFinal2 += 3
+    }
+    skillMultiplierFinal1 = Math.round(skillMultiplierFinal1*100)/100
+    //put the multiplier back into HTML
+    if (registlet == 0) {result.innerHTML += `<li><b>Final Attack Skill Constant: </b> ${constantFinal}; constant for each hit</li>
+    <li><b>Final Attack Skill Multiplier (First 2 hits): </b> ${skillMultiplierFinal1}; multiplier for each hit<br>
+    <li><b>Final Attack Skill Multiplier (Third hit): </b> ${skillMultiplierFinal2}<br>
+    <li><b>Final Attack Hit Count:</b> 3 hits; damage calculation is done for each hit</li>`}
+    else {result.innerHTML += `<li><b>HP restore after the 11th Auto Attack:</b> ${heal}</li>`}
+}
+
+function addRampageSkillInfo(result) {
+    result.innerHTML += `<br><b>Skill Effect:</b> Grants <b>Rampage buff</b> with 11 stacks to the caster upon cast; each auto attack will consume 1 stack upon hitting a target<br>`
+}
+
+function addRampageBuffInfo(level, registlet, weapon, result) {
+	var ampr = Math.floor(2.5 * level)
+	var atkCount = 10
+	if (registlet > 0) {atkCount += 1}
+	result.innerHTML += `<br><b>Buff Effects:</b></li>
+	<li>Sets the caster's <b>DEF</b>, <b>MDEF</b> and <b>Dodge</b> to 0 (<b>overrides all other DEF, MDEF and Dodge modifiers</b>) and deactivates Power Wave while the buff is active</li>
+	<li>Empowers the caster's next ${atkCount} auto attacks and change their hit counts</li>`
+	if (weapon == "DW") {result.innerHTML += `<li><b>Attack MP Recovery</b> +${ampr}; <b>not doubled</b> by Dual Swords effect</li>`}
+	else {result.innerHTML += `<li><b>Attack MP Recovery</b> +${ampr}</li>`}
+}
+
+function addRampageFinalAttackInfo(registlet, result) {
+    if (registlet == 0) {result.innerHTML += `<li>On the 11th auto attack, perform an uncancellable "Final Attack" that is treated as a <b>Physical skill</b> with <b>Perfect Aim attribute</b>:
+	<ul><li>&nbsp&nbsp&nbsp- It <b>inflicts physical proration</b> and <b>consumes buffs that apply to the next skill</b>; however, it is unaffected by <b>Whack</b>, <b>Short Range Damage</b> stat and <b>Sword Techniques</b></li>
+	<li>&nbsp&nbsp&nbsp- It cannot [Miss] or [Graze], but can be [Evaded] (its damage is reduced to 1 instead of being fully evaded)</li>
+	<li>&nbsp&nbsp&nbsp- It is unaffected by <b>Motion Speed</b> stat, but can be affected by [Freeze] and <b>Trigger Slash</b></li></ul></li>`}
+	else {result.innerHTML += `<li>After the 11th auto attack, restore HP based on the level of <b>Remedial Rampage Registlet</b> equipped</li>`}
+}
+
+function addRampageBuffDuration(registlet, result) {
+	var duration = 600;
+	var whenFinalAttack = ""
+	if (registlet == 0) {whenFinalAttack = "when the Final Attack ends"}
+	else {whenFinalAttack = "after the 11th auto attack"}
+	result.innerHTML += `<li><b>Buff Duration:</b> 10 minutes; the buff is also removed <b>${whenFinalAttack}</b> OR when inflicted with any ailment (the latter can be prevented with <b>Berserk's effect</b>)</li>`
+}
+
+function addRampageBuffLockInfo(result){
+	result.innerHTML += `<br><b>Extra info:</b>
+	<li>This skill <b>cannot be recast</b> if the buff is active; if this skill is in a <b>combo</b> and is not the first skill of that combo, the <b>combo will be temporarily disabled</b> as long as the buff is active</li>
+	<li>Rampage Stack will not be consumed if your auto attack [Missed] or was [Evaded]</li>
+	<li>This skill's total damage is <b>unaffected by Combo tags</b></li>`
+}
+
+function calcRampageValues(){
+    var weaponSelector = document.getElementById("rampageWeapon");
+    var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	var levelSelector = document.getElementById("rampageLevel");
+	var level = levelSelector[levelSelector.selectedIndex].value;
+    var registletSelector = document.getElementById("rampageRegistlet");
+    var registlet = registletSelector[registletSelector.selectedIndex].value;
+	var result = document.getElementById("rampageValues");
+	calcRampageAutoAttack(level, registlet, weapon, result)
+	calcRampageFinalHit(level, registlet, weapon, result)
+	addRampageSkillInfo(result)
+	addRampageBuffInfo(level, registlet, weapon, result)
+	addRampageFinalAttackInfo(registlet, result)
+	addRampageBuffDuration(registlet, result)
+	addRampageBuffLockInfo(result)
+}
+calcRampageValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Meteor Breaker</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/meteorbreaker.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 4)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>600</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Strong attack like a meteor. Chance to inflict [Dizzy] on a target and generate Area of Effect when landing. Become invincible when activating the skill.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>2nd Hit Power increases depending on DEX.<br> Dizzy Rate +75%</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/dw.png'></p>
+                            <p style="padding-right:10px">Dual Swords</p>
+                        </div>
+                        <p>Dizzy Rate +75%</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>1st Hit Power +200<br> 1st Hit Power increases depending on STR.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "meteorWeapon" onchange = "calcMeteorValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "meteorLevel" onchange = "calcMeteorValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <div id="meteorStrInput">
+                    <span class="sub-title"> <b>Base STR:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="meteorStrValue" onchange="calcMeteorValues()" style="width: 50px;">
+                </div>
+                <div id="meteorDexInput">
+                    <span class="sub-title"> <b>Base DEX:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="meteorDexValue" onchange="calcMeteorValues()" style="width: 50px;">
+                </div>
+                <br>
+                <div style="text-align:left;width:90%">
+                <span id = "meteorValues">
+</span>
+                </div>
+
+                <script>
+function weaponStrCheck(weapon, strSection) {
+    if (weapon == "2H") {strSection.style = "display: block"}
+    else {strSection.style = "display: none"}
+}
+
+function weaponDexCheck(weapon, dexSection) {
+    if (weapon == "1H") {dexSection.style = "display: block"}
+    else {dexSection.style = "display: none"}
+}
+
+function calcMeteorConstant(level, result) {
+    var constant1 = 400 + 20*level
+    var constant2 = 0
+    constant1 = Math.floor(constant1)
+    result.innerHTML = `<li><b>Skill Constant (First Hit): </b> ${constant1} </li>
+    <li><b>Skill Constant (Second Hit): </b> ${constant2} </li>`
+}
+
+function calcMeteorMultiplier(level, weapon, strValue, dexValue, result) {
+    var multiplier1 = 4 + (0.2 * level)
+    var multiplier2 = 1 + (0.5 * level)
+    if (weapon == "1H") {multiplier2 += dexValue/200}
+    else if (weapon == "2H") {multiplier1 += 2 + strValue/1000}
+
+    function rounding(value) {
+        if (value - Math.floor(value*100)/100 < 0.00999999) {value = Math.floor(value*100)/100}
+        else {value = Math.round(value*100)/100}
+        return value
+    }
+
+    multiplier1 = rounding(multiplier1)
+    multiplier2 = rounding(multiplier2)
+    result.innerHTML += `<li><b>Skill Multiplier (First Hit):</b> ${multiplier1}</li>
+    <li><b>Skill Multiplier (Second Hit):</b> ${multiplier2}</li>
+    <li><b>Hit Count:</b> 2 hits on the main target; 1 hit on all other targets; damage calculation is done for each hit</li><br>`
+}
+
+function calcMeteorSecondHitRange(level, weapon, result){
+	var hitRange = 2 + Math.floor((level-1)/3)*0.5
+	result.innerHTML += `<li><b>Second Hit Range (radius):</b> ${hitRange}m, around the <b>main target's position on cast</b></li>`
+}
+
+function addMeteorInvincibleInfo(result) {
+	result.innerHTML += `<li>Upon using this skill, gain [Invincible] for 2 seconds OR until you land</li>`
+}
+
+function calcMeteorDizzyChance(level, weapon, result){
+	var chance = Math.floor(2.5 * level)
+	if (weapon == "1H" || weapon == "DW") {chance += 75}
+	//Writing the results
+	result.innerHTML += `<li class = 'skill-ailment'><b>Dizzy Chance (First Hit):</b> ${chance}%</li>
+	<li><b>Dizzy Duration:</b> 10 seconds</li>`
+}
+
+function calcMeteorValues(){
+    var weaponSelector = document.getElementById("meteorWeapon");
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	var levelSelector = document.getElementById("meteorLevel");
+	var level = levelSelector[levelSelector.selectedIndex].value;
+    var strSection = document.getElementById("meteorStrInput")
+    var strValue = document.getElementById("meteorStrValue").value
+    var dexSection = document.getElementById("meteorDexInput")
+    var dexValue = document.getElementById("meteorDexValue").value
+	var result = document.getElementById("meteorValues");
+	weaponStrCheck(weapon, strSection)
+	weaponDexCheck(weapon, dexSection)
+	calcMeteorConstant(level, result)
+	calcMeteorMultiplier(level, weapon, strValue, dexValue, result)
+	calcMeteorSecondHitRange(level, weapon, result);
+	addMeteorInvincibleInfo(result);
+    calcMeteorDizzyChance(level, weapon, result);
+    result.innerHTML += `<br>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b>`
+}
+
+calcMeteorValues()
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Shut-Out</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/shutout.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 5)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>100</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">A merciless blow. If the target is afflicted by Flinch/Tumble/Stun and not Bleed, the damage dealt will increase and the target will be inflicted with [Bleed].</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Power increases further depending on DEX.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/dw.png'></p>
+                            <p style="padding-right:10px">Dual Swords</p>
+                        </div>
+                        <p>Power increases further depending on AGI.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>As the increase in base power depends on the skill level, the increase will be very small when the condition is met.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "shutOutWeapon" onchange = "calcShutOutValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "shutOutSkillLevel" onchange = "calcShutOutValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>Target is afflicted with [Flinch]/[Tumble]/[Stun], but not [Bleed]:</b> </span>
+                <input type = "checkbox" id = "shutOutFTS" onchange = "calcShutOutValues()"><br>
+                <div id="shutOutDexInput">
+                    <span class="sub-title"> <b>Base DEX:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="shutOutDexValue" onchange="calcShutOutValues()" style="width: 50px;">
+                </div>
+                <div id="shutOutAgiInput">
+                    <span class="sub-title"> <b>Base AGI:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="shutOutAgiValue" onchange="calcShutOutValues()" style="width: 50px;">
+                </div>
+                <br>
+                <div style="text-align:left;width:90%">
+        <span id = "shutOutValues">
+</span>
+                </div>
+                <script>
+function shutOutWeaponDWCheck(weapon, agiSection) {
+    if (weapon == "DW") {agiSection.style = "display: block"}
+    else {agiSection.style = "display: none"}
+}
+
+function shutOutWeaponDexCheck(weapon, dexSection) {
+    if (weapon == "1H") {dexSection.style = "display: block"}
+    else {dexSection.style = "display: none"}
+}
+
+function calcShutOutConstant(weapon, result) {
+    var constant = 100
+    if (weapon == "DW") {constant += 100}
+    result.innerHTML = `<li><b>Skill Constant:</b> ${constant}</li>`
+}
+
+function calcShutOutMultiplier(level, weapon, interrupt, dexValue, agiValue, result) {
+    var multiplier1 = 5
+    var multiplier2 = 10 + 1*level
+    if (weapon == "1H") {
+        multiplier1 += dexValue/200
+        multiplier2 += 0.5 * level + dexValue/100
+    }
+    else if (weapon == "DW") {
+        multiplier1 += agiValue/400
+        multiplier2 += 0.5 * level + agiValue/200
+    }
+    else {multiplier1 += 1*level}
+
+    function rounding(value) {
+       if (value - Math.floor(value*100)/100 < 0.00999999) {value = Math.floor(value*100)/100}
+        else {value = Math.round(value*100)/100}
+        return value
+    }
+
+    multiplier1 = rounding(multiplier1)
+    multiplier2 = rounding(multiplier2)
+    var HTML = `<li><b>Skill Multiplier:</b> `
+    if (interrupt) {HTML += multiplier2}
+    else {HTML += multiplier1}
+    HTML += `</li>`
+    result.innerHTML += HTML
+}
+
+function addShutOutSkillEffect(weapon, interrupt, result) {
+	if (weapon == "1H" && interrupt) {result.innerHTML += `<br><li><b>Total Physical Pierce</b> of this skill is <b>quadrupled</b></li>`}
+	else if (weapon == "DW" && interrupt) {result.innerHTML += `<br><li><b>Total Physical Pierce</b> of this skill is <b>doubled</b></li>`}
+	else if (weapon == "2H") {result.innerHTML += `<br><li>This skill is <b>unaffected by motion speed modifier</b></li>`}
+}
+
+function calcShutOutBleedChance(interrupt, result) {
+	if (interrupt) {result.innerHTML += `<li><b>Bleed Chance:</b> 100%</li>
+	<li><b>Bleed Duration:</b> 10 seconds</li>`}
+}
+
+function addShutOutExtraInfo(result) {
+    result.innerHTML += `<br>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b>`
+}
+
+function calcShutOutValues(){
+    let weaponSelector = document.getElementById("shutOutWeapon");
+	let weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	let levelSelector = document.getElementById("shutOutSkillLevel");
+	let level = levelSelector[levelSelector.selectedIndex].value;
+	let interrupt = document.getElementById("shutOutFTS").checked;
+    let dexSection = document.getElementById("shutOutDexInput")
+    let dexValue = document.getElementById("shutOutDexValue").value
+    let agiSection = document.getElementById("shutOutAgiInput")
+    let agiValue = document.getElementById("shutOutAgiValue").value
+	let result = document.getElementById("shutOutValues")
+	shutOutWeaponDWCheck(weapon, agiSection)
+	shutOutWeaponDexCheck(weapon, dexSection)
+	calcShutOutConstant(weapon, result)
+	calcShutOutMultiplier(level, weapon, interrupt, dexValue, agiValue, result)
+	addShutOutSkillEffect(weapon, interrupt, result)
+    calcShutOutBleedChance(interrupt, result)
+    addShutOutExtraInfo(result)
+}
+calcShutOutValues();
+</script>
+            </details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Lunar Slash</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/lunarslash.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 5)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>400</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Slashes target and magic blade will deal additional damage after a slight delay.<br>
+                        Magic blade may inflict [Fatigue].</p></div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Performs an additional attack if another attack skill is used. This additional attack is unable to inflict [Fatigue], but Critical Rate increases according to the skill level.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "lunarSlashWeapon" onchange = "calcLunarSlashValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "lunarSlashSkillLevel" onchange = "calcLunarSlashValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class="sub-title"> <b>Total STR:</b> </span>
+                <input type="number" value="255" id="lunarSlashStrValue" onchange="calcLunarSlashValues()" style="width: 50px;"><br>
+                <span class="sub-title"> <b>Base INT:</b> </span>
+                <input type="number" value="1" min="1" max="510" id="lunarSlashIntValue" onchange="calcLunarSlashValues()" style="width: 50px;"><br>
+                <div id="lunarSlashComboInput">
+                    <span class="sub-title"> <b>CRT Stat:</b> </span>
+                    <input type="number" value="0" min="0" max="255" id="lunarSlashCrtValue" onchange="calcLunarSlashValues()" style="width: 50px;"><br>
+                    <span class="sub-title"> <b>Position in combo:</b> </span>
+                    <input type="number" value="1" min="1" max="10" id="lunarSlashComboCount" onchange="calcLunarSlashValues()" style="width: 30px;">
+                </div>
+                <br>
+                <div style="text-align:left;width:90%">
+            <span id = "lunarSlashValues">
+</span>
+                </div>
+                <script>
+function weaponComboCheck(weapon, comboSection) {
+    if (weapon == "2H") {comboSection.style = "display: block"}
+    else {comboSection.style = "display: none"}
+}
+
+function calcLunarSlashConstant(weapon, intValue, result) {
+    var constant1 = 400
+    var constant2 = intValue/2
+    if (constant2 - Math.floor(constant2) < 0.9) {constant2 = Math.floor(constant2)}
+    else {constant2 = Math.round(constant2)}
+    var HTML = `<li><b>Skill Constant (First Hit):</b> ${constant1}</li>
+    <li><b>Skill Constant (Magic Blade):</b> ${constant2}</li>`
+    if (weapon == "2H") {HTML += `<li><b>Skill Constant (Additional Attack):</b> ${intValue}; constant for each hit</li>`}
+    result.innerHTML = HTML
+}
+
+function calcLunarSlashMultiplier(level, weapon, strValue, comboCount, result) {
+    var multiplier1 = 10
+    var multiplier2 = strValue * level * 0.001
+    if (multiplier2 - Math.floor(multiplier2*100)/100 < 0.00999999) {multiplier2 = Math.floor(multiplier2*100)/100}
+    else {multiplier2 = Math.round(multiplier2*100)/100}
+    var HTML = `<li><b>Skill Multiplier (First Hit):</b> ${multiplier1}</li>
+    <li><b>Skill Multiplier (Magic Blade):</b> ${multiplier2}</li>`
+    if (weapon == "2H") {HTML += `<li><b>Skill Multiplier (Additional Attack):</b> ${multiplier2}; multiplier for each hit</li>`}
+    result.innerHTML += HTML
+}
+
+function addLunarSlashHitCount(weapon, comboCount, result) {
+    var HTML = `<li><b>Hit Count:</b> 2 hits`
+    if (weapon == "2H") {HTML += ` on the main target; 1 additional hit for each stack consumed`}
+    HTML += `; damage calculation is done for each hit</li><br>`
+    result.innerHTML += HTML
+}
+
+function calcLunarSlashFatigueChance(level, result) {
+    var fatigue = 4 * level
+	result.innerHTML += `<li><b>Fatigue Chance (Magic Blade):</b> ${fatigue}%</li>
+	<li><b>Fatigue Duration:</b> 10 seconds</li>`
+}
+
+function addLunarSlashSkillEffect(level, weapon, crtValue, comboCount, result) {
+    var stack = `stack`
+    if (comboCount > 1) {stack += `s`}
+    var cr = 10*level + 1*crtValue
+	if (weapon == "2H") {result.innerHTML += `<br><b>Buff Effect:</b>
+	<li>Grants ${comboCount} <b>Lunar Slash ${stack}</b> upon cast; can stack up to a maximum of <b>9 stacks</b></li>
+	<li>Hitting a target with an attack skill other than <b>Lunar Slash</b> will consume 1 stack to deal an <b>Additional Attack</b> on that target</li>
+	<li>The <b>Additional Attack</b> has a <b>fixed Critical Rate</b> of ${cr}</li>
+	<li><b>Buff Duration:</b> Until all stacks are consumed</li>`}
+}
+
+function addLunarSlashExtraInfo(weapon, result) {
+    result.innerHTML += `<br><b>Extra info:</b>
+    <li>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b></li>`
+    if (weapon == "2H") {result.innerHTML += `<li>If the used attack skill hits multiple targets, multiple stacks will be consumed accordingly</li>
+    <li>The <b>Additional Attack(s)</b> are <b>unaffected by Combo Tags</b></li>
+    <li>Strangely, the <b>Additional Attack(s)</b> are always affected by <b>Zero Stance registlet</b>, regardless of whether <b>Lunar Slash</b> or the skill that triggers these hit(s) is used out of combo or not</li>`}
+}
+
+function calcLunarSlashValues(){
+    let weaponSelector = document.getElementById("lunarSlashWeapon");
+	let weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	let levelSelector = document.getElementById("lunarSlashSkillLevel");
+	let level = levelSelector[levelSelector.selectedIndex].value;
+    let strValue = document.getElementById("lunarSlashStrValue").value
+    let intValue = document.getElementById("lunarSlashIntValue").value
+    let crtValue = document.getElementById("lunarSlashCrtValue").value
+    let comboSection = document.getElementById("lunarSlashComboInput")
+    let comboCount = document.getElementById("lunarSlashComboCount").value
+	let result = document.getElementById("lunarSlashValues")
+	weaponComboCheck(weapon, comboSection)
+	calcLunarSlashConstant(weapon, intValue, result)
+	calcLunarSlashMultiplier(level, weapon, strValue, comboCount, result)
+	addLunarSlashHitCount(weapon, comboCount, result)
+    calcLunarSlashFatigueChance(level, result)
+	addLunarSlashSkillEffect(level, weapon, crtValue, comboCount, result)
+    addLunarSlashExtraInfo(weapon, result)
+}
+calcLunarSlashValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Sonic Blade</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/sonicblade.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 1)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>200</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>12</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Thrust enemies by quickly moving toward them. Range and Critical Rate increase as the skill levels up. Become more powerful by using it consecutively.<br>
+                        <br><b>Sonic Blade changes to Super Sonic Blade when used while its buff is active</b><br><br></p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Activation Range +4m<br> Boost on Critical Rate</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Power +50<br> Range (Horizontal) +2m</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "sonicBladeWeapon" onchange = "calcSonicBladeValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "sonicBladeLevel" onchange = "calcSonicBladeValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>Sonic Blade buff is active:</b> </span>
+                <input type = "checkbox" id = "sonicBladeBuff" onchange = "calcSonicBladeValues()"><br>
+                <div id="sonicBladeBuffInput">
+                    <span class = "sub-title"><b>"Sonic Blade Extender" Registlet Level:</b> </span>
+                    <select id = "sonicBladeRegistlet" onchange = "calcSonicBladeValues()">
+                        <option value = "0" selected>0</option>
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                        <option value = "6">6</option>
+                        <option value = "7">7</option>
+                        <option value = "8">8</option>
+                        <option value = "9">9</option>
+                        <option value = "10">10</option>
+                        <option value = "11">11</option>
+                        <option value = "12">12</option>
+                        <option value = "13">13</option>
+                        <option value = "14">14</option>
+                        <option value = "15">15</option>
+                        <option value = "16">16</option>
+                        <option value = "17">17</option>
+                        <option value = "18">18</option>
+                        <option value = "19">19</option>
+                        <option value = "20">20</option>
+                    </select><br>
+                </div>
+                <br>
+                <span id = "sonicBladeValues">
+</span>
+
+                <script>
+function sonicBladeRegistletCheck(superSonicBlade, sonicBladeBuffSection) {
+    if (superSonicBlade) {sonicBladeBuffSection.style = "display: block"}
+    else {sonicBladeBuffSection.style = "display: none"}
+}
+
+function calcSonicBladeConstant(level, result) {
+    var constant = 100 + 5 * level
+    constant = Math.floor(constant)
+    result.innerHTML = `<li><b>Skill Constant:</b> ${constant} </li>`
+}
+
+function calcSonicBladeMultiplier(level, weapon, superSonicBlade, result) {
+    var multiplier = 1 + 0.05 * level
+    if (weapon == "2H") {multiplier += 0.5}
+	if (superSonicBlade) {multiplier *= 2}
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${multiplier}</li><br>`
+}
+
+function calcSonicBladeCastRange(level, weapon, result) {
+	var castRange = 4 + 4*Math.ceil(level/3)
+	if (weapon == "1H") {castRange += 4}
+	result.innerHTML += `<li><b>Maximum Cast Range:</b> ${castRange}m</li>`
+}
+
+function calcSonicBladeHitRange(weapon, superSonicBlade, result) {
+	var hitRange = 1
+	if (superSonicBlade) {hitRange += 1}
+	if (weapon == "2H") {hitRange += 2}
+	result.innerHTML += `<li><b>Hit Range (radius): </b> ${hitRange}m, around the <b>caster</b></li>`
+}
+
+function addSuperSonicBladeInfo(superSonicBlade, result) {
+    var buff = ``
+	if(superSonicBlade) {buff += `Refreshes`}
+	else {buff = `Grants`}
+	result.innerHTML += `<li>${buff} <b>Sonic Blade buff</b> upon cast</li>`
+}
+
+function calcSonicBladeCritRate(level, weapon, superSonicBlade, result) {
+	var critRate = 1*level
+	if(weapon == "1H") {critRate *= 10}
+	var name = "Sonic Blade"
+	if (superSonicBlade) {name = "Super Sonic Blade"}
+	result.innerHTML += `<li><b>Critical Rate</b> of <b>${name}</b> +${critRate}</li>`
+}
+
+function addSonicBladeMovementInfo(superSonicBlade, result) {
+    var move = "dash"
+    if (superSonicBlade) {move = "teleport"}
+    var HTML = `<li>The caster will <b>${move}</b> to roughly 0m`
+    if (superSonicBlade) {HTML += ` on the other side of`}
+    else {HTML += ` in front of`}
+    HTML += ` the <b>main target</b> after using this skill, <b>hitting all other enemies along the path</b> within the circular Hit Range`
+	HTML += `</li>`
+	result.innerHTML += HTML
+}
+
+function addSonicBladeBuffEffect(registlet, superSonicBlade, result) {
+	var duration = 5 + registlet*1
+	if (superSonicBlade) {result.innerHTML += `<br><b>Buff Effect:</b>
+	<li>Changes <b>Sonic Blade</b> into <b>Super Sonic Blade</b> with enhanced effects</li>
+	<li><b>Buff Duration:</b> ${duration} seconds; casting <b>Super Sonic Blade</b> before the duration ends will <b>refresh the duration</b></li>`}
+}
+
+function addSonicBladeExtraInfo(superSonicBlade, result) {
+    var move = "dash"
+    if (superSonicBlade) {move = "teleport"}
+    var HTML = `<br><b>Extra info:</b>
+    <li>The said "0m distance" of the <b>${move}</b> is the displayed distance from the <b>caster</b> to the <b>edge of the target's circular hitbox</b> (vaguely indicated by their target circle) after the <b>${move}</b>`
+    if (!superSonicBlade) {HTML += `; if you are already within said range, the <b>${move}</b> will be skipped`}
+    HTML += `</li>`
+    result.innerHTML += HTML
+}
+
+function calcSonicBladeValues() {
+	var weaponSelector = document.getElementById("sonicBladeWeapon");
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	var levelSelector = document.getElementById("sonicBladeLevel");
+	var level = levelSelector[levelSelector.selectedIndex].value;
+    var registletSelector = document.getElementById("sonicBladeRegistlet");
+    var registlet = registletSelector[registletSelector.selectedIndex].value;
+	var superSonicBlade = document.getElementById("sonicBladeBuff").checked;
+    var sonicBladeBuffSection = document.getElementById("sonicBladeBuffInput")
+	var result = document.getElementById("sonicBladeValues")
+	sonicBladeRegistletCheck(superSonicBlade, sonicBladeBuffSection)
+	calcSonicBladeConstant(level, result)
+	calcSonicBladeMultiplier(level, weapon, superSonicBlade, result)
+	calcSonicBladeCastRange(level, weapon, result)
+	calcSonicBladeHitRange(weapon, superSonicBlade, result)
+	addSuperSonicBladeInfo(superSonicBlade, result)
+	addSonicBladeMovementInfo(superSonicBlade, result);
+	calcSonicBladeCritRate(level, weapon, superSonicBlade, result)
+	addSonicBladeBuffEffect(registlet, superSonicBlade, result)
+	addSonicBladeExtraInfo(superSonicBlade, result)
+}
+
+calcSonicBladeValues()
+</script>
+            </details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Spiral Air</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/spiralair.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 2)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>300</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Sharply thrust the target causing wind slashes. No critical damage. When Spiral Air hits a target, Critical Damage increases for a few seconds.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Boost on Critical Damage Buff</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Power +50</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "spiralWeapon" onchange = "calcSpiralValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "spiralLevel" onchange = "calcSpiralValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>"Spiral Air Enhancer" Registlet Level:</b> </span>
+                <select id = "spiralRegistlet" onchange = "calcSpiralValues()">
+                    <option value = "0" selected>0</option>
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10">10</option>
+                    <option value = "11">11</option>
+                    <option value = "12">12</option>
+                    <option value = "13">13</option>
+                    <option value = "14">14</option>
+                    <option value = "15">15</option>
+                    <option value = "16">16</option>
+                    <option value = "17">17</option>
+                    <option value = "18">18</option>
+                    <option value = "19">19</option>
+                    <option value = "20">20</option>
+                </select><br>
+                <span class = "sub-title"><b>Total DEX:</b> </span>
+                <input type = "number" id = "spiralDex" value = "1" style = "width: 4em; text-align: right" onchange = "calcSpiralValues()"><br>
+                <br>
+                <span id = "spiralValues">
+</span>
+
+                <script>
+function calcSpiralConstant(level, result) {
+    var constant = 30
+    constant = Math.floor(constant)
+    result.innerHTML = `<li><b>Skill Constant: </b> ${constant}; constant for each hit</li>`
+}
+
+function calcSpiralMultiplier(level, registlet, weapon, result) {
+    var multiplier = 0.1 + (0.03 * level) + (0.02 * registlet)
+    if (weapon == "2H") {multiplier += 0.05}
+    multiplier = Math.round(multiplier*100)/100
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${multiplier}; multiplier for each hit</li>
+    <li><b>Hit Count:</b> 10 hits; damage calculation is done once, then copied for the remaining hits</li><br>`
+}
+
+function addSpiralSkillInfo(result) {
+	result.innerHTML += `<li>This skill<b> cannot do critical hits</b></li>
+	<li>Grants <b>Spiral Air buff</b> upon any successful hit</li>`
+}
+
+function calcSpiralBuffCritDamage(level, weapon, spiralDEX, result) {
+	var maxCritDamage = 10
+	var critDamage = 0.5 + level/2 + spiralDEX/(60 - level)
+	if (weapon == "2H") {
+		critDamage /= 2
+		maxCritDamage /= 2
+	}
+	if (critDamage - Math.floor(critDamage) < 0.999999) {critDamage = Math.floor(critDamage)}
+	else {critDamage = Math.round(critDamage)}
+	//Setting min and max values
+	if (critDamage < 1) {critDamage = 1}
+	else if (critDamage > maxCritDamage) {critDamage = maxCritDamage}
+	//Writing the results
+	result.innerHTML += `<li><b>Critical Damage</b> +${critDamage}</li>`
+}
+
+function calcSpiralBuffDuration(level, result) {
+	var duration = 1*level
+	var HTML = `<li><b>Buff Duration:</b> ${duration} second`
+	if (duration != 1) {HTML += `s`}
+	HTML += `; any subsequence successful hit will refresh the duration</li>`
+	result.innerHTML += HTML
+}
+
+function calcSpiralValues() {
+	var weaponSelector = document.getElementById("spiralWeapon");
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	var levelSelector = document.getElementById("spiralLevel");
+	var level = levelSelector[levelSelector.selectedIndex].value;
+    var registletSelector = document.getElementById("spiralRegistlet");
+    var registlet = registletSelector[registletSelector.selectedIndex].value;
+	var spiralDEX = document.getElementById("spiralDex").value;
+	var result = document.getElementById("spiralValues")
+	calcSpiralConstant(level, result)
+	calcSpiralMultiplier(level, registlet, weapon, result)
+	addSpiralSkillInfo(result)
+    result.innerHTML += `<br> <span><b>Buff Effect:</b></span>`
+    calcSpiralBuffCritDamage(level, weapon, spiralDEX, result)
+	calcSpiralBuffDuration(level, result)
+    result.innerHTML += `<br>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b>`
+}
+
+calcSpiralValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Sword Tempest</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/swordtempest.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 3)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>400</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>12</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">A strong slash that generates a tempest. The tempest will deal damage over time. Enemies will be sucked into it once.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Whirlwind Power increases depending on DEX.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Bullet Power +100<br> Bullet Power increases depending on STR.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "tempestWeapon" onchange = "calcTempestValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "tempestLevel" onchange = "calcTempestValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <div id="tempestStrInput">
+                    <span class="sub-title"> <b>Base STR:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="tempestStrValue" onchange="calcTempestValues()" style="width: 50px;">
+                </div>
+                <div id="tempestDexInput">
+                    <span class="sub-title"> <b>Base DEX:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="tempestDexValue" onchange="calcTempestValues()" style="width: 50px;">
+                </div>
+                <span class = "sub-title"><b>"Sword Tempest Extender" Registlet equipped:</b> </span>
+                <input type = "checkbox" id = "tempestRegistlet" onchange = "calcTempestValues()"><br>
+                <br>
+                <span id = "tempestValues">
+</span>
+
+                <script>
+function weaponStrCheck(weapon, strSection) {
+    if (weapon == "2H") {strSection.style = "display: block"}
+    else {strSection.style = "display: none"}
+}
+
+function weaponDexCheck(weapon, dexSection) {
+    if (weapon == "1H") {dexSection.style = "display: block"}
+    else {dexSection.style = "display: none"}
+}
+
+function calcTempestConstant(level, result) {
+    var constant1 = 0
+    var constant2 = 80
+    //flooring the result
+    constant = Math.floor(constant1)
+    constant = Math.floor(constant2)
+    //put back into HTML section
+    result.innerHTML = `<li><b>Skill Constant (Bullet): </b> ${constant1} </li>
+    <li><b>Skill Constant (Whirlwind): </b> ${constant2}; constant for each hit </li>`
+}
+
+function calcTempestMultiplier(level, weapon, strValue, dexValue, result) {
+    var multiplier1 = 1.5 + (0.1 * level)
+    var multiplier2 = 0.5 + (0.05 * level)
+    if (weapon == "1H") {multiplier2 += dexValue/500}
+    else {multiplier1 += 1 + strValue/500}
+
+    function rounding(value) {
+        if (value - Math.floor(value*100)/100 < 0.00999999) {value = Math.floor(value*100)/100}
+        else {value = Math.round(value*100)/100}
+        return value
+    }
+
+    multiplier1 = rounding(multiplier1)
+    multiplier2 = rounding(multiplier2)
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier (Bullet): </b> ${multiplier1}</li>
+    <li><b>Skill Multiplier (Whirlwind): </b> ${multiplier2}; multiplier for each hit</li>`
+}
+
+function calcTempestHitCount(level, registlet, result) {
+	var hitCount = 1 + Math.ceil(level/2)
+	if (registlet) {hitCount += 1}
+	result.innerHTML += `<li><b>Hit Count:</b> 1 hit for Bullet; ${hitCount} hits for Whirlwind; damage calculation is done for each hit</li><br>`;
+}
+
+function calcTempestHitRange(level, result) {
+	var hitRange = Math.floor(2 + level/3)
+	result.innerHTML += `<li><b>Hit Range (radius):</b> ${hitRange}m, around the <b>point of impact</b> between the <b>bullet</b> and the <b>main target</b> and around the <b>center of the tempest</b></li>`;
+}
+
+function addTempestSuctionInfo(result) {
+	result.innerHTML += `<li><b>Suction Chance</b>: 50% on <b>bosses</b>; 100% on other targets; only occurs <b>once per target per cast</b></li>
+	<li><b>Suction Duration</b>: 1 second</li>`
+}
+
+function addTempestExtraInfo(result){
+	result.innerHTML += `<br><b>Extra info:</b>
+	<li>This skill inflicts <b>Magic Proration</b>, but uses <b>Physical Proration</b> for its damage calculation</li>
+	<li>The <b>Bullet</b> is affected by <b>Whack</b>, <b>Long Range passive</b>, <b>Short Range Damage</b> and <b>Long Range Damage</b> stats; the <b>Whirlwind</b>, on the other hand, is unaffected by them</li>`
+}
+
+function calcTempestValues(){
+    var weaponSelector = document.getElementById("tempestWeapon");
+    var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	var levelSelector = document.getElementById("tempestLevel");
+	var level = levelSelector[levelSelector.selectedIndex].value;
+    var strSection = document.getElementById("tempestStrInput")
+    var strValue = document.getElementById("tempestStrValue").value
+    var dexSection = document.getElementById("tempestDexInput")
+    var dexValue = document.getElementById("tempestDexValue").value
+    var registlet = document.getElementById("tempestRegistlet").checked;
+	var result = document.getElementById("tempestValues");
+	weaponStrCheck(weapon, strSection)
+	weaponDexCheck(weapon, dexSection)
+	calcTempestConstant(level, result)
+	calcTempestMultiplier(level, weapon, strValue, dexValue, result)
+	calcTempestHitCount(level, registlet, result)
+	calcTempestHitRange(level, result)
+	addTempestSuctionInfo(result)
+	addTempestExtraInfo(result)
+}
+
+calcTempestValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Buster Blade</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/busterblade.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 4)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>300</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>7</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Add aura and slash consecutively. Weapon ATK increases for a few seconds when activating Buster Blade. Restore a small amount of HP when the buff is added. The buff is not overwritten.
+                        <br><br><b>Buster Blade will not overwrite an existing Buster Blade buff</b><br><br></p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Power Increases Depending on DEX.<br>Heal Amount increases depending on VIT.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/dw.png'></p>
+                            <p style="padding-right:10px">Dual Swords</p>
+                        </div>
+                        <p>Heal Amount increases depending on VIT.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Power Increases depending on STR.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/shield.png'></p>
+                            <p style="padding-right:10px">Shield</p>
+                        </div>
+                        <p>Weapon ATK and Heal Amount increases based on shield ability.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "busterWeapon" onchange = "calcBusterValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "busterLevel" onchange = "calcBusterValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <div id="busterStrInput">
+                    <span class="sub-title"> <b>Base STR:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="busterStrValue" onchange="calcBusterValues()" style="width: 50px;">
+                </div>
+                <div id="busterDexInput">
+                    <span class="sub-title"> <b>Base DEX:</b> </span>
+                    <input type="number" value="255" min="1" max="510" id="busterDexValue" onchange="calcBusterValues()" style="width: 50px;">
+                </div>
+                <div id="busterVitInput">
+                    <span class="sub-title"><b>Base VIT:</b> </span>
+                    <input type="number" value="1" min="1" max="510" id = "busterVIT" onchange = "calcBusterValues()" style="width: 50px;"><br>
+                </div>
+                <div id="shieldInput">
+                    <span class = "sub-title"><b>Shield equipped:</b> </span>
+                    <input type = "checkbox" id = "shieldEquipped" onchange = "calcBusterValues()"><br>
+                </div>
+                <div id="shieldDefInput">
+                    <span class="sub-title"><b>Shield DEF:</b> </span>
+                    <input type="number" value = "0" min = "0" id = "shieldDefValue" onchange = "calcBusterValues()" style="width: 50px;"><br>
+                </div>
+                <div id="shieldRefineInput">
+                    <span class = "sub-title"><b>Shield Refinement Level:</b> </span>
+                    <select id = "shieldRefineLevel" onchange = "calcBusterValues()">
+                        <option value = "0" selected>+0</option>
+                        <option value = "1">+1</option>
+                        <option value = "2">+2</option>
+                        <option value = "3">+3</option>
+                        <option value = "4">+4</option>
+                        <option value = "5">+5</option>
+                        <option value = "6">+6</option>
+                        <option value = "7">+7</option>
+                        <option value = "8">+8</option>
+                        <option value = "9">+9</option>
+                        <option value = "10">+E</option>
+                        <option value = "11">+D</option>
+                        <option value = "12">+C</option>
+                        <option value = "13">+B</option>
+                        <option value = "14">+A</option>
+                        <option value = "15">+S</option>
+                    </select><br>
+                </div>
+                <br>
+                <span id = "busterValues">
+</span>
+
+                <script>
+function weaponStrCheck(weapon, strSection) {
+    if (weapon == "2H") {strSection.style = "display: block"}
+    else {strSection.style = "display: none"}
+}
+
+function weaponDexCheck(weapon, dexSection) {
+    if (weapon == "1H") {dexSection.style = "display: block"}
+    else {dexSection.style = "display: none"}
+}
+
+function weaponVitCheck(weapon, vitSection) {
+    if (weapon == "1H" || weapon == "DW") {vitSection.style = "display: block"}
+    else {vitSection.style = "display: none"}
+}
+
+function shieldEquipCheck(weapon, shieldSection) {
+    if (weapon == "1H") {shieldSection.style = "display: block"}
+    else {shieldSection.style = "display: none"}
+}
+
+function shieldValueCheck(weapon, shieldEquip, shieldDefSection, shieldRefineSection) {
+    if (shieldEquip && weapon == "1H") {
+            shieldDefSection.style = "display: block"
+            shieldRefineSection.style = "display: block"
+        }
+    else {
+            shieldDefSection.style = "display: none"
+            shieldRefineSection.style = "display: none"
+        }
+}
+
+function calcBusterConstant(level, result) {
+    var constant = 30 * level
+    constant = Math.floor(constant)
+    result.innerHTML = `<li><b>Skill Constant: </b> ${constant}; total constant of all hits</li>`
+}
+
+function calcBusterMultiplier(level, weapon, strValue, dexValue, result) {
+    var multiplier = 0.75 * level
+    if (weapon == "1H") {multiplier += dexValue/200}
+    else if (weapon == "2H") {multiplier += strValue/100}
+    if (multiplier - Math.floor(multiplier*100)/100 < 0.0099999) {multiplier = Math.floor(multiplier*100)/100}
+    else {multiplier = Math.round(multiplier*100)/100}
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${multiplier}; total multiplier of all hits</li>
+    <li><b>Hit Count:</b> 3 hits; damage calculation is done once then spread evenly between the hits</li>`
+}
+
+function addBusterCritInfo(result) {
+	result.innerHTML += `<br><li>This skill will <b>always deal critical hits</b></li>
+	<li>Grants <b>Buster Blade buff</b> upon successful cast</li>`
+}
+
+function calcBusterBuffWeaponATK(level, weapon, shieldEquip, shieldRefine, result) {
+	var weaponATK = 1*level;
+	if (shieldEquip && weapon == "1H") {weaponATK += shieldRefine*1}
+	var HTML = `<li><b>Weapon ATK</b> +${weaponATK}%`
+	if (weapon == "DW") {HTML += `; only applies to the <b>main hand sword</b>`}
+	HTML += `</li>`
+	result.innerHTML += HTML
+}
+
+function calcBusterHpRecovery(weapon, baseVIT, shieldEquip, shieldDef, result) {
+	var HPRecovery = 1000
+	if (weapon == "1H" || weapon == "DW") {HPRecovery += 2*baseVIT}
+	if (shieldEquip && weapon == "1H") {HPRecovery += shieldDef*1}
+	result.innerHTML += `<li>The caster <b>recovers</b> ${HPRecovery} HP whenever the <b>buff</b> is successfully applied</li>`
+}
+
+function addBusterBuffDuration(result) {
+	//Adding Buster buff duration and restrictions
+	result.innerHTML += "<li><b>Buff Duration:</b> 10 seconds; <b>cannot be reapplied/refreshed</b> if it's already active</li>";
+}
+
+function calcBusterValues(){
+	var weaponSelector = document.getElementById("busterWeapon");
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	var levelSelector = document.getElementById("busterLevel");
+	var level = levelSelector[levelSelector.selectedIndex].value;
+    var strSection = document.getElementById("busterStrInput")
+    var strValue = document.getElementById("busterStrValue").value
+    var dexSection = document.getElementById("busterDexInput")
+    var dexValue = document.getElementById("busterDexValue").value
+    var vitSection = document.getElementById("busterVitInput")
+	var baseVIT = document.getElementById("busterVIT").value
+    var shieldSection = document.getElementById("shieldInput")
+    var shieldEquip = document.getElementById("shieldEquipped").checked
+    var shieldDefSection = document.getElementById("shieldDefInput")
+	var shieldDef = document.getElementById("shieldDefValue").value
+    var shieldRefineSection = document.getElementById("shieldRefineInput")
+    var shieldRefineSelector = document.getElementById("shieldRefineLevel")
+    var shieldRefine = shieldRefineSelector[shieldRefineSelector.selectedIndex].value;
+	var result = document.getElementById("busterValues");
+	weaponStrCheck(weapon, strSection)
+	weaponDexCheck(weapon, dexSection)
+	weaponVitCheck(weapon, vitSection)
+	shieldEquipCheck(weapon, shieldSection)
+	shieldValueCheck(weapon, shieldEquip, shieldDefSection, shieldRefineSection)
+	calcBusterConstant(level, result)
+	calcBusterMultiplier(level, weapon, strValue, dexValue, result)
+	addBusterCritInfo(result);
+    result.innerHTML += `<br> <span><b>Buff Effect:</b></span>`
+	calcBusterBuffWeaponATK(level, weapon, shieldEquip, shieldRefine, result);
+	calcBusterHpRecovery(weapon, baseVIT, shieldEquip, shieldDef, result);
+	addBusterBuffDuration(result);
+}
+
+calcBusterValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Aura Blade</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/aurablade.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 5)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>200</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>24</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Slashes and clears your surrounding with a blade surrounded by an aura. The power of the next skill used is 1.2x stronger.<br>
+                        Grants Additional Melee to weapon while active.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Buffs will not be consumed.<br>
+                            Extends the buffs of Aura Blade by 10 seconds when getting the buffs of "Buster Blade".</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/dw.png'></p>
+                            <p style="padding-right:10px">Dual Swords</p>
+                        </div>
+                        <p>The power of the next skill used becomes 1.1x stronger.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>The Additional Melee granted gets reduced to 50%.<br>
+                            The power of the next skill used becomes 1.3x stronger.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "auraBladeWeapon" onchange = "calcAuraBladeValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "auraBladeSkillLevel" onchange = "calcAuraBladeValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <br>
+                <span id = "auraBladeValues">
+</span>
+
+                <script>
+function calcAuraBladeConstant(result) {
+    var constant = 200
+    result.innerHTML = `<li><b>Skill Constant:</b> ${constant} </li>`
+}
+
+function calcAuraBladeMultiplier(level, result) {
+    var skillMultiplier = 5 + 1*level
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${skillMultiplier}</li>`
+}
+
+function addAuraBladeHitCount(weapon, result) {
+    var hitCount = ``
+    if (weapon == "1H" || weapon == "DW") {hitCount += `2 hits; damage calculation is done once then spread evenly between the hits`}
+    else {hitCount += `1 hit`}
+	result.innerHTML += `<li><b>Hit Count:</b> ${hitCount}</li><br>`
+}
+
+function addAuraBladeSkillEffect(level, result) {
+	result.innerHTML += `<li><b>Hit Range (radius):</b> 3.5m, around the <b>caster</b></li>
+	<li>Grants <b>Aura Blade buff</b> upon successful cast</li>`
+}
+
+function calcAuraBladeBuffEffect(level, weapon, result) {
+    var skillDmg = 1.2
+    var addMelee = 10 * level
+    var duration = `40 seconds`
+    if (weapon == "1H") {duration += `; successfully applying <b>Buster Blade buff</b> will extend the remaining duration by 10 seconds`}
+    else {duration += ` OR until a skill is used`}
+    if (weapon == "DW") {skillDmg -= 0.1}
+    else if (weapon == "2H") {
+        skillDmg += 0.1
+        addMelee -= 50
+        if (addMelee < 0) {addMelee = 0}
+    }
+    skillDmg = Math.round(skillDmg*10)/10
+    var HTML = `<br><b>Buff Effect:</b>
+	<li>Increases the damage of`
+	if (weapon == "1H") {HTML += ` all skills used by ${skillDmg} times while the buff is active`}
+	else {HTML += ` the next skill used by ${skillDmg} times`}
+	HTML += `; stacks <b>additively</b> with <b>Brave Aura</b> and <b>Mana Recharge</b>, and <b>does not apply to this skill itself</b></li>`
+	if (addMelee > 0) {HTML += `<li><b>Additional Melee</b> +${addMelee}%</li>`}
+	HTML += `<li><b>Buff Duration:</b> ${duration}</li>`
+	result.innerHTML += HTML
+}
+
+function calcAuraBladeValues() {
+	let weaponSelector = document.getElementById("auraBladeWeapon");
+	let weapon = weaponSelector[weaponSelector.selectedIndex].value;
+	let levelSelector = document.getElementById("auraBladeSkillLevel");
+	let level = levelSelector[levelSelector.selectedIndex].value;
+	let result = document.getElementById("auraBladeValues");
+	calcAuraBladeConstant(result)
+	calcAuraBladeMultiplier(level, result)
+	addAuraBladeHitCount(weapon, result)
+	addAuraBladeSkillEffect(level, result)
+	calcAuraBladeBuffEffect(level, weapon, result)
+}
+
+calcAuraBladeValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Sword Mastery</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/swordmastery.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 1)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Passive</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Get better at swordsmanship. ATK of One/Two-Handed Swords increases.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "swordMasteryLevel" onchange = "calcSwordMasteryValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <br>
+                <span id = "swordMasteryValues">
+</span>
+
+                <script>
+function calcSwordMasteryATK(level, result) {
+	var ATK = 1 + Math.ceil((level - 2)/5)
+	result.innerHTML = `<li><b>ATK</b> +${ATK}%</li>`
+}
+
+function calcSwordMasteryWeaponATK(level, result) {
+	var weaponATK = 3 * level
+	result.innerHTML += `<li><b>Weapon ATK</b> +${weaponATK}%</li>`
+}
+
+function addSwordMasteryInfo(result) {
+	result.innerHTML += `<br>This passive can affect the <b>subhand's Weapon ATK</b> and <b>ATK</b> of Dual Swords`
+}
+
+function calcSwordMasteryValues() {
+	var levelSelector = document.getElementById("swordMasteryLevel")
+	var level = levelSelector[levelSelector.selectedIndex].value
+	var result = document.getElementById("swordMasteryValues")
+	calcSwordMasteryATK(level, result)
+	calcSwordMasteryWeaponATK(level, result)
+	addSwordMasteryInfo(result)
+}
+
+calcSwordMasteryValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Quick Slash</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/quickslash.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 1)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Passive</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Shorten the Attack Intervals of One/Two-Handed Swords.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "quickSlashLevel" onchange = "calcQuickSlashValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <br>
+                <span id = "quickSlashValues">
+</span>
+
+                <script>
+function calcQuickSlashASPD(level, result) {
+	var ASPD = 1*level;
+	result.innerHTML = "<li><b>Attack Speed</b> +" + (ASPD) + "%</li>";
+}
+
+function calcQuickSlashFlatASPD(level, result) {
+	var ASPD = 10 * level;
+	result.innerHTML += "<li><b>Attack Speed</b> +" + (ASPD) + "</li>"
+}
+
+function calcQuickSlashValues() {
+	let levelSelector = document.getElementById("quickSlashLevel");
+	let level = levelSelector[levelSelector.selectedIndex].value;
+	let result = document.getElementById("quickSlashValues");
+	calcQuickSlashASPD(level, result);
+	calcQuickSlashFlatASPD(level, result);
+}
+
+calcQuickSlashValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Sword Techniques</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/swordtechniques.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 2)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Passive</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Learn the mastership of swords. The damage dealt of Blade Skill increases.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "swordTechniquesLevel" onchange = "calcSwordTechniquesDamageUp()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <br>
+                <span id = "swordTechniquesValues">
+</span>
+
+                <script>
+function calcSwordTechniquesDamageUp() {
+	var levelSelector = document.getElementById("swordTechniquesLevel")
+	var level = levelSelector[levelSelector.selectedIndex].value
+	var result = document.getElementById("swordTechniquesValues")
+	var damageUp = 2*level
+	result.innerHTML = `Increases the damage of all skills from the <b>Blade Skills</b> tree by ${damageUp}%.`
+}
+
+calcSwordTechniquesDamageUp();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>War Cry</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/warcry.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 3)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/all.png"/>
+                        <br> Available with all weapons
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>300</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>0</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Perform a rallying cry. Increases ATK for a while. Removes status ailment: [Fear].</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Duration +50sec</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Boost on ATK</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "warCryWeapon" onchange = "calcWarCryValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "2H">2-Handed Sword</option>
+                    <option value = "other">Other</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "warCryLevel" onchange = "calcWarCryValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>"Dominant War Cry" Registlet equipped:</b> </span>
+                <input type = "checkbox" id = "warCryRegistlet" onchange = "calcWarCryValues()"><br>
+                <br>
+                <span id = "warCryValues">
+</span>
+
+                <script>
+function addWarCryFearInfo(registlet, result) {
+    var HTML = `<b>Skill Effect:</b> Removes [Fear] ailment from and grants <b>War Cry buff</b> to the <b>caster</b> and <b>party members</b> upon successful cast`
+	if (registlet) {HTML += `; this skill's activation <b>cannot be interrupted by [Fear] ailment</b>`}
+	HTML += `<br><b>Buff Effect:</b><br>`
+    result.innerHTML = HTML
+}
+
+function calcWarCryBuffATK(level, weapon, result) {
+	var ATK = 1*level
+	if (weapon == "2H") {ATK += 5}
+	result.innerHTML += `<li><b>ATK</b> +${ATK}%</li>`
+}
+
+function calcWarCryBuffDuration(level, weapon, result) {
+	var duration = 15 + 1*level
+	if (weapon == "1H") {duration += 50}
+	result.innerHTML += `<li><b>Buff Duration:</b> ${duration} seconds</li>`
+}
+
+function addWarCryExtraInfo(result) {
+	result.innerHTML += `<br><b>Extra info:</b>
+	<li>If another party member casts this skill, the buff <b>will not be refreshed</b> if either of these conditions apply:<ul>
+	<li>&nbsp&nbsp&nbsp- The <b>skill level</b> of the newer War Cry is <b>lower</b> than the previous one&#39;s</li>
+	<li>&nbsp&nbsp&nbsp- The <b>duration</b> of the newer War Cry is <b>lower</b> than the previous one&#39;s</li></ul></li>`
+}
+
+function calcWarCryValues(){
+	var weaponSelector = document.getElementById("warCryWeapon")
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value
+	var levelSelector = document.getElementById("warCryLevel")
+	var level = levelSelector[levelSelector.selectedIndex].value
+    var registlet = document.getElementById("warCryRegistlet").checked
+	var result = document.getElementById("warCryValues")
+	addWarCryFearInfo(registlet, result)
+	calcWarCryBuffATK(level, weapon, result)
+	calcWarCryBuffDuration(level, weapon, result)
+	addWarCryExtraInfo(result)
+}
+calcWarCryValues();
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Berserk</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/berserk.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 4)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/all.png"/>
+                        <br> Available with all weapons
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>500</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>0</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Stop thinking and wield the weapon like a berserker. Increase Normal Attack Power/Attack Speed/Critical Rate for a few seconds and greatly decrease Stability/DEF/MDEF. Rampage is not removed by status ailments while it is in effect.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>Reduce the decrease of Stability.<br> Reduce the decrease of DEF. (<b style="color: #E77577">Except Dual Swords</b>)<br> Reduce the decrease of MDEF. (<b style="color: #E77577">Except Dual Swords</b>)<br> Duration +20sec</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>Boost on Critical Rate<br> Reduce the decrease of Stability.<br> Duration +20sec</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "berserkWeapon" onchange = "calcBerserkValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                    <option value = "other">Other</option>
+                </select><br>
+                <span class = "sub-title"><b>Skill Level:</b> </span>
+                <select id = "berserkLevel" onchange = "calcBerserkValues()">
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>"Berserk Control" Registlet equipped:</b> </span>
+                <input type = "checkbox" id = "berserkRegistlet" onchange = "calcBerserkValues()"><br>
+                <br>
+                <span id = "berserkValues">
+</span>
+
+                <script>
+function addBerserkRegistletEffect(level, registlet, result) {
+    var preserveChance = 10 * level
+    var HTML = ``
+    if (registlet) {
+        HTML += `<b>Passive Effect:</b> `
+        if (preserveChance < 100) {HTML += `${preserveChance}% chance to p`}
+        else {HTML += `P`}
+        HTML += `revent <b>Rampage buff</b> from being <b>removed by ailments</b><br><br>
+        <b>Active:</b> Grants <b>Berserk buff</b> upon cast<br>`
+    }
+    result.innerHTML += HTML
+}
+
+function calcBerserkBuffASPDIncrease(level, result) {
+	var ASPD1 = 10 * level
+	var ASPD2 = 100 * level
+	result.innerHTML += `<span><b>Buff Effect:</b><br></span>
+	<li><b>Attack Speed</b> +${ASPD1}%</li>
+	<li><b>Attack Speed</b> +${ASPD2}</li>`;
+}
+
+function calcBerserkBuffAutoIncrease(level, weapon, result) {
+	var AAMult = 0.1 * level
+	AAMult = Math.round(AAMult*100)/100
+	//Writing the results
+	var autoAttackInfo = `<li><b>Auto Attack Skill Multiplier</b> +${AAMult}`
+	//Bonus info for Dual Swords
+	if (weapon == "DW"){
+		autoAttackInfo += `; <span style = 'color: #8db7e0'><b>only applies to the main hand attacks</span></b>`
+	}
+	autoAttackInfo += `</li>`
+	result.innerHTML += autoAttackInfo
+}
+
+function calcBerserkBuffCritRateIncrease(level, weapon, result) {
+	var critRate = 2.5 * level
+	if (weapon == "2H") {critRate *= 2}
+    critRate = Math.floor(critRate)
+	result.innerHTML += `<li><b>Critical Rate</b> +${critRate}</li>`
+}
+
+function calcBerserkBuffStabilityDecrease(level, weapon, result){
+	var stability = 100 - 5*level
+	if (weapon != "other") {stability /= 2}
+	stability = Math.floor(stability)
+	var stabilityInfo = `<li style = 'color: #C70039'><b>Stability</b> -${stability}%`
+	if (weapon == "DW") {stabilityInfo += `; <span style = 'color: #8db7e0'><b>does not affect the sub-hand sword's Stability</span></b>`}
+	stabilityInfo += `</li>`
+	result.innerHTML += stabilityInfo
+}
+
+function calcBerserkBuffPMDEFDecrease(level, weapon, result) {
+	var DEF = 100 - 1 * level
+	if (weapon == "1H") {DEF /= 2}
+	DEF = Math.floor(DEF)
+	result.innerHTML += `<li style = 'color: #C70039'><b>DEF</b> -${DEF}%</li>
+	<li style = 'color: #C70039'><b>MDEF</b> -${DEF}%</li>`
+}
+
+function addBerserkRampageAilmentInfo(level, registlet, result) {
+	//Adding Berserk and Rampage interaction
+	if (!(level == 10 && registlet)) {result.innerHTML += "<li><b>Prevents Rampage buff</b> from being <b>removed by ailments</b></li>";}
+}
+
+function calcBerserkBuffDuration(weapon, result) {
+	var duration = 10
+	if (weapon != "other") {duration += 20}
+	result.innerHTML += `<li><b>Buff Duration:</b> ${duration} seconds</li>`
+}
+
+function calcBerserkValues() {
+	var weaponSelector = document.getElementById("berserkWeapon")
+	var weapon = weaponSelector[weaponSelector.selectedIndex].value
+	var levelSelector = document.getElementById("berserkLevel")
+	var level = levelSelector[levelSelector.selectedIndex].value
+    var registlet = document.getElementById("berserkRegistlet").checked
+	var result = document.getElementById("berserkValues")
+	result.innerHTML = "" //avoid repeating
+	addBerserkRegistletEffect(level, registlet, result)
+	calcBerserkBuffASPDIncrease(level, result)
+	calcBerserkBuffAutoIncrease(level, weapon, result)
+	calcBerserkBuffCritRateIncrease(level, weapon, result)
+	calcBerserkBuffStabilityDecrease(level, weapon, result)
+	calcBerserkBuffPMDEFDecrease(level, weapon, result)
+	addBerserkRampageAilmentInfo(level, registlet, result)
+	calcBerserkBuffDuration(weapon, result)
+}
+
+calcBerserkValues()
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Gladiate</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/gladiate.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 5)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Neutral</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>0</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>0</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;">Reduces the damage received for a certain number of times for 10 seconds. Slightly restores MP when damage is reduced.<br>
+                        Restores 10 MP per number of damage reduction effects remaining when the time is up.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ohs.png'></p>
+                            <p style="padding-right:10px">1-Handed Sword</p>
+                        </div>
+                        <p>The amount of MP recovered increases when damage gets reduced.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/dw.png'></p>
+                            <p style="padding-right:10px">Dual Swords</p>
+                        </div>
+                        <p>The amount of MP recovered is halved when damage gets reduced.<br>
+                            Damage reduction is doubled.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/ths.png'></p>
+                            <p style="padding-right:10px">2-Handed Sword</p>
+                        </div>
+                        <p>The amount of MP recovered slightly increases when damage gets reduced.<br>
+                            Damage reduction is doubled.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                <select id = "gladiateWeapon" onchange = "calcGladiateValues()">
+                    <option value = "1H" selected>1-Handed Sword</option>
+                    <option value = "DW">Dual Swords</option>
+                    <option value = "2H">2-Handed Sword</option>
+                </select><br>
+                <span class="sub-title"><b>Skill Level:</b></span>
+                <select id="gladiateSkillLevel" onchange="calcGladiateValues()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10" selected>10</option>
+                </select><br>
+                <span class = "sub-title"><b>Total Attack MP Recovery:</b> </span>
+                <input type = "number" id = "gladiateAmprInput" value = "30" style = "width: 3em; text-align: right" onchange = "calcGladiateValues()">
+                <div id="gladiateDWAmprInput">
+                    <span>(value before Dual Swords' AMPR-doubling effect)</span>
+                </div><br>
+                <br>
+                <span id="gladiateValues"></span>
+
+                <script>
+function weaponDWCheck(weapon, dwSection) {
+    if (weapon == "DW") {dwSection.style = "display: inline"}
+    else {dwSection.style = "display: none"}
+}
+
+function calcGladiateBuff(level, weapon, ampr, result) {
+    var dmgReduc = level
+    var mpHeal = ampr * level/10
+    if (weapon != "1H") {dmgReduc *= 2}
+    if (weapon == "DW") {mpHeal *= 0.5}
+    else if (weapon == "2H") {mpHeal *= 0.75}
+    if (mpHeal - Math.floor(mpHeal) < 0.99) {mpHeal = Math.floor(mpHeal)}
+    else {mpHeal = Math.round(mpHeal)}
+    var HTML = `<b>Buff Effect:</b>
+    <li>Grants <b>Gladiate buff</b> with ${level} stack`
+    if (level > 1) {HTML += `s`}
+    HTML += `</li><li>Each time you receive attack damage while this buff is active, consumes 1 stack to reduce the received damage by ${dmgReduc}% and recover ${mpHeal} MP</li>
+    <li>Recovers 10 MP for each remaining stack <b>when the buff duration ends</b></li>
+    <li><b>Buff Duration:</b> 10 seconds</li><br>`
+    result.innerHTML = HTML
+}
+
+function addGladiateExtra(result) {
+    result.innerHTML += `<b>Extra Info:</b>
+    <li>Recasting this skill while the buff is already active will <b>reset the duration back to 10 seconds</b>; as this is <b>not treated</b> as "buff duration ends", the MP recovery effect that triggers when the buff duration ends will not activate</li>`
+}
+
+function calcGladiateValues() {
+	let weaponSelector = document.getElementById("gladiateWeapon");
+	let weapon = weaponSelector[weaponSelector.selectedIndex].value;
+    let levelSelector = document.getElementById("gladiateSkillLevel")
+    let level = levelSelector[levelSelector.selectedIndex].value
+	let ampr = document.getElementById("gladiateAmprInput").value;
+    let dwSection = document.getElementById("gladiateDWAmprInput")
+    let result = document.getElementById("gladiateValues")
+    weaponDWCheck(weapon, dwSection)
+    calcGladiateBuff(level, weapon, ampr, result)
+    addGladiateExtra(result)
+}
+
+calcGladiateValues()
+</script></details></p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Swift Attack</legend>
+            <div style="margin:5px 0px 15px">
+                <div style="display:grid;grid-template-columns: 0.5fr 0.7fr;width:90%;">
+                    <div style="align-self:center">
+                        <img src='https://indo.coryn.club/skill/blade/swiftattack.png' width='45' height='45'/>
+                        <p class="tier">(Skill Tier 3)</p>
+                    </div>
+                    <div style="justify-self:end;">
+                        <img style="margin-right: 1px;" src="https://indo.coryn.club/images/icon/ths.png"/>
+                        <img style="margin-left: 1px;" src="https://indo.coryn.club/images/icon/ohs.png"/>
+                        <br> 2-Handed Sword/1-Handed Sword only
+                    </div>
+                </div>
+                <hr>
+                <div class="monster-prop">
+                    <div>
+                        <p class="accent-bold">Type</p>
+                        <p>Active, Physical Skill</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Element</p>
+                        <p>Weapon Dependent</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">MP</p>
+                        <p>Dual Swords: 200; Other: 300</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo start</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Combo middle</p>
+                        <p>Yes</p>
+                    </div>
+                    <div>
+                        <p class="accent-bold">Range</p>
+                        <p>2</p>
+                    </div>
+                    <div class="span-2">
+                        <p class="accent-bold">Description</p>
+                        <p style="margin-top: 5px;"><p>Kick while pretending to attack with a sword. This skill inflicts "Normal Attack Proration". MP Cost for the next skill used will be reduced when the skill reaches its maximum level.</p>
+                    </div>
+                    <div class="span-3">
+                        <div class="accent-bold" style="display:grid;grid-template-columns: 35px auto;grid-column-gap: 10px">
+                            <p><img src='https://indo.coryn.club/images/icon/dw.png'></p>
+                            <p style="padding-right:10px">Dual Swords</p>
+                        </div>
+                        <p>MP Cost -100<br> Chance to make target Tumble.</p>
+                    </div>
+                </div>
+                <hr>
+                <p class="accent-bold">Extras</p>
+                    <p><details><summary>Show more...</summary><br><span class = "sub-title"><b>Weapon:</b> </span>
+                    <select id = "swiftAttackWeapon" onchange = "calcswiftAttackValue()">
+                        <option value = "12H" selected>1-Handed/2-Handed Sword</option>
+                        <option value = "DW">Dual Swords</option>
+                    </select><br>
+                    <span class = "sub-title"><b>Skill Level:</b> </span>
+                    <select id = "swiftAttackLevel" onchange = "calcswiftAttackValue()">
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                        <option value = "6">6</option>
+                        <option value = "7">7</option>
+                        <option value = "8">8</option>
+                        <option value = "9">9</option>
+                        <option value = "10" selected>10</option>
+                    </select><br>
+                    <br>
+                    <span id = "swiftAttackValue">
+</span>
+
+                    <script>
+function calcSwiftAttackMpCost(weapon, result) {
+	var cost = 300
+	if (weapon == "DW") {cost -= 100}
+	result.innerHTML = `<li><b>MP Cost:</b> ${cost}</li>`
+}
+
+function calcSwiftAttackConstant(level, result) {
+    var constant = ((level+1)^2)*3
+    //flooring the result
+    constant = Math.floor(constant)
+    if (constant > 300) {constant = 300}
+    //put back into HTML section
+    result.innerHTML += `<li><b>Skill Constant: </b> ${constant} </li>`
+}
+
+function calcSwiftAttackMultiplier(level, result) {
+    var multiplier = 0.3 + (0.05 * level)
+    multiplier = Math.round(multiplier*100)/100
+    if (multiplier > 0.75) {multiplier = 0.75}
+    //put the multiplier back into HTML
+    result.innerHTML += `<li><b>Skill Multiplier:</b> ${multiplier}</li>`
+}
+
+function calcEffectSwiftAttack(level, weapon, result) {
+    var HTML = ``
+
+    if (level == 10) {
+        HTML += `<br><li>Grants <b>Swift Attack buff</b> upon cast</li>`
+        if (weapon == "DW") {HTML += `<li><b>Tumble Chance:</b> 100% </li>`}
+        HTML += `<br><b>Buff Effect:</b>
+        <li>The next <b>skill</b> has its <b>MP Cost halved</b>, rounded up to the nearest multiple of 100</li>
+        <li><b>Buff Duration:</b> Until a skill is used</li>`
+    }
+    result.innerHTML += HTML
+}
+
+function addSwiftAttackExtraInfo(result) {
+    result.innerHTML += `<br><b>Extra info:</b>
+    <li>This skill's <b>maximum cast range</b> is equal to the maximum auto attack range of the <b>main weapon</b></li>
+    <li>This skill inflicts <b>Neutral/Normal Attack Proration</b>, but uses <b>Physical Proration</b> for its damage calculation</li>`
+}
+
+function calcswiftAttackValue() {
+    var weaponSelector = document.getElementById("swiftAttackWeapon");
+    var weapon = weaponSelector[weaponSelector.selectedIndex].value;
+    var levelSelector = document.getElementById("swiftAttackLevel");
+    var level = levelSelector[levelSelector.selectedIndex].value
+    let result = document.getElementById("swiftAttackValue")
+    calcSwiftAttackMpCost(weapon, result)
+    calcSwiftAttackConstant (level, result)
+    calcSwiftAttackMultiplier(level, result)
+    calcEffectSwiftAttack(level, weapon, result)
+    addSwiftAttackExtraInfo(result)
+}
+
+calcswiftAttackValue();
+</script></details></p>
+            </div>
+        </fieldset>
+</center>
+</div>
+</body>
+</html>
