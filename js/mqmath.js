@@ -121,7 +121,7 @@ const mq_data = {
     "The Sky with a Ceiling": 71400000,
     "Rivalry Between Dragon and Weredragon": 76300000,
     "Weredragon Couple and a Baby": 79300000,
-    "Weredragons' Vital Point":82300000
+    "Weredragons' Vital Point":82300000,
 };
 
 
